@@ -1,19 +1,28 @@
+// Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getDatabase } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+import { getFirestore, collection, addDoc, getDocs } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+import { getDatabase, ref, push, set, onValue } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+// Your Config
 const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "YOUR_DOMAIN",
-  databaseURL: "YOUR_DATABASE_URL",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_BUCKET",
-  messagingSenderId: "YOUR_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyA33of57qBOpIUioKDQ7dMx0KZR6OXLECY",
+  authDomain: "bondhotto-24.firebaseapp.com",
+  databaseURL: "https://bondhotto-24-default-rtdb.firebaseio.com",
+  projectId: "bondhotto-24",
+  storageBucket: "bondhotto-24.firebasestorage.app",
+  messagingSenderId: "585952718894",
+  appId: "1:585952718894:web:1d9b2e9f12f617a2f2afbf",
+  measurementId: "G-KJQSLPY9NQ"
 };
 
-const app = initializeApp(firebaseConfig);
-
+// Initialize Firebase
+export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
-export const db = getDatabase(app);
+export const db = getFirestore(app);
+export const rtdb = getDatabase(app);
