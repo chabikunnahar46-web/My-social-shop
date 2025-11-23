@@ -1,0 +1,34 @@
+import { rtdb } from "./Firebase.js";
+import { ref, push, set, onValue } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+const postRef = ref(rtdb, "posts/");
+
+// Add new post
+document.getElementById("postBtn").addEventListener("click", () => {
+    let text = document.getElementById("postText").value;
+
+    let newPostRef = push(postRef);
+    set(newPostRef, {
+        text: text,
+        time: new Date().toISOString()
+    });
+
+    document.getElementById("postText").value = "";
+});
+
+// Load posts
+onValue(postRef, (snapshot) => {
+    let data = snapshot.val();
+    let box = document.getElementById("postBox");
+    box.innerHTML = "";
+
+    for (let id in data) {
+        box.innerHTML += `
+            <div class="post">
+                <p>${data[id].text}</p>
+                <small>${data[id].time}</small>
+            </div>
+        `;
+    }
+});
