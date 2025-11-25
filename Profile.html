@@ -1,44 +1,33 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile – Bondhutto24</title>
+    <title>Your Profile</title>
+    <link rel="stylesheet" href="Style.css">
 </head>
+
 <body>
 
-<h2>User Profile</h2>
+<header class="fb-topbar">
+    <div class="logo">🤝 Bondhutto24</div>
+    <nav class="menu">
+        <a href="index.html" class="menu-item">🏠 হোম</a>
+        <a href="post.html" class="menu-item">📝 পোস্ট</a>
+        <a href="reels.html" class="menu-item">🎬 রিলস</a>
+        <a href="friends.html" class="menu-item">👥 বন্ধু</a>
+        <a href="notify.html" class="menu-item">🔔 নোটিফিকেশন</a>
+        <a href="Profile.html" class="menu-item">👤 প্রোফাইল</a>
+    </nav>
+</header>
 
-<div id="authSection">
-    <h3>Login</h3>
-    <input id="loginEmail" placeholder="Email">
-    <input id="loginPass" type="password" placeholder="Password">
-    <button onclick="login()">Login</button>
+<h2>👤 Your Profile</h2>
 
-    <br><br>
-
-    <h3>Create Account</h3>
-    <input id="signupEmail" placeholder="Email">
-    <input id="signupPass" type="password" placeholder="Password">
-    <button onclick="signup()">Signup</button>
+<div class="profile-box">
+    <img src="https://via.placeholder.com/120" class="pfp">
+    <h3>Your Name</h3>
+    <p>Email: your@email.com
 </div>
 
-
-<div id="profileSection" style="display:none;">
-    <h3>Welcome</h3>
-
-    <img id="profilePic" width="120" style="border-radius:50%;">
-    <h3 id="userEmail"></h3>
-
-    <br>
-    <input type="file" id="uploadPic" accept="image/*">
-    <button onclick="uploadProfilePic()">Upload Picture</button>
-
-    <br><br>
-    <button onclick="logout()">Logout</button>
-</div>
-
-<script type="module" src="profile.js"></script>
+<script src="Profile.js"></script>
 
 </body>
 </html>
