@@ -1,4 +1,4 @@
-/* Google Bangla Font */
+অ/* Google Bangla Font */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap');
 
 * {
@@ -137,3 +137,37 @@ body {
   width: 100%;
   border-radius: 10px;
   }
+.fb-topbar {
+    width: 100%;
+    background: #1877f2;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.fb-topbar .logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.menu {
+    display: flex;
+    gap: 15px;
+}
+
+.menu-item {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+
+.menu-item:hover {
+    background: #0e5dc0;
+    }
