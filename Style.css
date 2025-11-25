@@ -123,3 +123,17 @@ body {
     font-size: 17px;
   }
 }
+
+.shop-card {
+  width: 90%;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px auto;
+  box-shadow: 0px 0px 10px #ddd;
+}
+
+.shop-card img {
+  width: 100%;
+  border-radius: 10px;
+  }
