@@ -72,3 +72,24 @@
 </body>
 
 </html>
+<h2>Profile</h2>
+
+<div id="authSection">
+    <h3>Login</h3>
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPass" placeholder="Password" type="password">
+    <button onclick="login()">Login</button>
+
+    <h3>Create Account</h3>
+    <input id="signupEmail" placeholder="Email">
+    <input id="signupPass" placeholder="Password" type="password">
+    <button onclick="signup()">Signup</button>
+</div>
+
+<div id="profileSection" style="display:none;">
+    <img id="profilePic" width="100" style="border-radius:50%;">
+    <h3 id="userEmail"></h3>
+
+    <input type="file" id="uploadPic">
+    <button onclick="uploadProfilePic()">Upload Profile Picture</button>
+  </div>
