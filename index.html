@@ -1,115 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <title>Untitled</title>
-    <link rel="stylesheet" href="./style.css">
-
-  </head>
-    
-  <body>
-  <!DOCTYPE HTML
-
 <html lang="bn">
 
 <head>
-
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Bondhutto24</title>
-
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+  <!-- ===== TOP BAR ===== -->
   <header class="topbar">
-
     <h1>🤝 Bondhutto24</h1>
-
     <nav>
-
       <a href="#">হোম</a>
-
       <a href="#">পোস্ট</a>
-
       <a href="#">ভিডিও</a>
-
       <a href="#">প্রোফাইল</a>
-
     </nav>
-
   </header>
 
+  <!-- ===== CREATE POST ===== -->
   <section class="create-post">
-
     <textarea placeholder="আপনার মুড বা ভাব শেয়ার করুন..."></textarea>
-
     <button>📤 শেয়ার করুন</button>
-
   </section>
 
+  <!-- ===== FEED ===== -->
   <section class="feed">
-
     <div class="post">
-
       <h3>😊 রিয়া রহমান</h3>
-
       <p>আজকের দিনটা অনেক সুন্দর 💖</p>
-
       <div class="actions">
-
         <button>❤️ রিয়াক্ট</button>
-
         <button>💬 মন্তব্য</button>
-
         <button>🔁 শেয়ার</button>
-
       </div>
-
     </div>
 
     <div class="post">
-
       <h3>😎 হাসান হোসেন</h3>
-
       <p>বন্ধুত্ব মানে শুধু হাসি নয়, বোঝাপড়া 💫</p>
-
       <div class="actions">
-
         <button>❤️ রিয়াক্ট</button>
-
         <button>💬 মন্তব্য</button>
-
         <button>🔁 শেয়ার</button>
-
       </div>
-
     </div>
-
   </section>
 
-</body>
 
-</html>
-    <script  src="./script.js"></script>
+  <!-- ===== SHOP FORM ===== -->
+  <h2>Add Item to Shop</h2>
 
-  </body>
-  
-</html>
-<h2>Add Item to Shop</h2>
-
-<form id="shopForm">
+  <form id="shopForm">
     <input id="itemName" placeholder="Item Name" required>
     <input id="itemPrice" placeholder="Price" required>
     <textarea id="itemDesc" placeholder="Description" required></textarea>
     <input type="file" id="itemImage" accept="image/*" required>
     <button type="submit">Add Item</button>
-</form>
+  </form>
 
-<h2>Shop Items</h2>
-<div id="shopItems"></div>
+  <h2>Shop Items</h2>
+  <div id="shopItems"></div>
 
-<script type="module" src="shop.js"></script>
+
+  <script src="script.js"></script>
+  <script type="module" src="shop.js"></script>
+
+</body>
+
+</html>
