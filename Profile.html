@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile – Bondhutto24</title>
+</head>
+<body>
+
+<h2>User Profile</h2>
+
+<div id="authSection">
+    <h3>Login</h3>
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPass" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+
+    <br><br>
+
+    <h3>Create Account</h3>
+    <input id="signupEmail" placeholder="Email">
+    <input id="signupPass" type="password" placeholder="Password">
+    <button onclick="signup()">Signup</button>
+</div>
+
+
+<div id="profileSection" style="display:none;">
+    <h3>Welcome</h3>
+
+    <img id="profilePic" width="120" style="border-radius:50%;">
+    <h3 id="userEmail"></h3>
+
+    <br>
+    <input type="file" id="uploadPic" accept="image/*">
+    <button onclick="uploadProfilePic()">Upload Picture</button>
+
+    <br><br>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<script type="module" src="profile.js"></script>
+
+</body>
+</html>
