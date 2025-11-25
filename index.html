@@ -99,3 +99,17 @@
   </body>
   
 </html>
+<h2>Add Item to Shop</h2>
+
+<form id="shopForm">
+    <input id="itemName" placeholder="Item Name" required>
+    <input id="itemPrice" placeholder="Price" required>
+    <textarea id="itemDesc" placeholder="Description" required></textarea>
+    <input type="file" id="itemImage" accept="image/*" required>
+    <button type="submit">Add Item</button>
+</form>
+
+<h2>Shop Items</h2>
+<div id="shopItems"></div>
+
+<script type="module" src="shop.js"></script>
