@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup - Bondhutto24</title>
+</head>
+<body>
+<h2>Create Account</h2>
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+<button id="signupBtn">Sign Up</button>
+
+<script type="module">
+import { auth, createUserWithEmailAndPassword, sendEmailVerification } from './Firebase.js';
+
+document.getElementById('signupBtn').addEventListener('click', async () => {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await sendEmailVerification(userCredential.user);
+        alert("Account created! Check your email to verify.");
+        window.location.href = "login.html";
+    } catch (error) {
+        alert(error.message);
+    }
+});
+</script>
+</body>
+</html>
