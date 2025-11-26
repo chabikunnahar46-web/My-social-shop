@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill Learning Hub</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+    .card { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+    .card h2 { margin: 0; }
+    button {
+        padding: 10px 20px;
+        background: #0066ff;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+    .skill-box {
+        padding: 10px;
+        background: #fff;
+        margin: 10px 0;
+        border-left: 5px solid #0066ff;
+        border-radius: 5px;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>🎓 Student Skill Learning Hub</h1>
+<p>এখানে ছাত্ররা বিভিন্ন স্কিল শিখতে পারবে।</p>
+
+<div id="skillList"></div>
+
+<script>
+const skills = [
+    {
+        title: "📱 Basic Coding",
+        details: "HTML, CSS, JavaScript সহজভাবে শেখার কোর্স।",
+        link: "https://www.youtube.com/watch?v=G3e-cpL7ofc"
+    },
+    {
+        title: "📊 Digital Marketing",
+        details: "Facebook Ads, SEO, YouTube দিয়ে ইনকাম শেখা।",
+        link: "https://www.youtube.com/watch?v=V7W8jZkH5AM"
+    },
+    {
+        title: "🎨 Graphic Design",
+        details: "Canva + Photoshop Basic Level গাইড।",
+        link: "https://www.youtube.com/watch?v=8ddC1R3eG-E"
+    },
+    {
+        title: "🤖 AI Tools Mastery",
+        details: "ChatGPT, Midjourney, AI Automation শেখার কোর্স।",
+        link: "https://www.youtube.com/watch?v=z4JUm0vR0l0"
+    },
+    {
+        title: "💰 Freelancing Starter Guide",
+        details: "Fiverr + Upwork শুরু করার সম্পূর্ণ টিউটোরিয়াল।",
+        link: "https://www.youtube.com/watch?v=WW-7YgeYyS8"
+    }
+];
+
+
+function loadSkills() {
+    const box = document.getElementById('skillList');
+    skills.forEach(sk => {
+        box.innerHTML += `
+            <div class="card">
+                <h2>${sk.title}</h2>
+                <p>${sk.details}</p>
+                <a href="${sk.link}" target="_blank">
+                    <button>Start Learning →</button>
+                </a>
+            </div>
+        `;
+    });
+}
+loadSkills();
+</script>
+
+</body>
+</html>
