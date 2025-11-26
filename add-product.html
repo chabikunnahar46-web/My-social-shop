@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Product - Bondhutto24</title>
+<link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+<header>
+<h1>🤝 Bondhutto24 - Add Product</h1>
+</header>
+
+<form id="productForm">
+  <input id="itemName" placeholder="Product Name" required>
+  <input id="itemPrice" placeholder="Price" type="number" required>
+  <textarea id="itemDesc" placeholder="Description" required></textarea>
+  <input type="file" id="itemImage1" accept="image/*" required>
+  <input type="file" id="itemImage2" accept="image/*" required>
+  <input type="file" id="itemImage3" accept="image/*" required>
+  <button type="submit">Upload Product</button>
+</form>
+
+<script type="module" src="scripts/shop.js"></script>
+</body>
+</html>
