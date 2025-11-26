@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Bondhutto24</title>
+</head>
+<body>
+<h2>Login</h2>
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+<button id="loginBtn">Login</button>
+
+<script type="module">
+import { auth, signInWithEmailAndPassword, onAuthStateChanged } from './Firebase.js';
+
+onAuthStateChanged(auth, (user) => {
+    if(user && user.emailVerified) {
+        window.location.href = "profile.html";
+    }
+});
+
+document.getElementById('loginBtn').addEventListener('click', async () => {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        if(!userCredential.user.emailVerified) {
+            alert("Please verify your email first!");
+            return;
+        }
+        window.location.href = "profile.html";
+    } catch (error) {
+        alert(error.message);
+    }
+});
+</script>
+</body>
+</html>
