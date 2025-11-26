@@ -1,8 +1,16 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bondhutto24</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Top Bar -->
 <header class="fb-topbar">
     <div class="logo">🤝 Bondhutto24</div>
-
     <nav class="menu">
         <a href="index.html" class="menu-item">🏠 হোম</a>
         <a href="post.html" class="menu-item">📝 পোস্ট</a>
@@ -12,51 +20,39 @@
         <a href="Profile.html" class="menu-item">👤 প্রোফাইল</a>
     </nav>
 </header>
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bondhutto24</title>
-  <link rel="stylesheet" href="style.css">
-</head>
 
-<body>
-<div class="post-box">
+<!-- Post Box with Button Inline -->
+<div class="post-container">
     <textarea id="postText" placeholder="আপনার মুড বা ভাব লিখুন..."></textarea>
-    <button onclick="createPost()">📤 শেয়ার করুন</button>
+    <button class="post-btn" onclick="createPost()">📤 পোস্ট করুন</button>
 </div>
 
-<div id="allPosts"></div>
-  <!-- ===== TOP BAR ===== -->
-  <header class="topbar">
-    <h1>🤝 Bondhutto24</h1>
-    <nav>
-      <a href="#">হোম</a>
-      <a href="#">পোস্ট</a>
-      <a href="#">ভিডিও</a>
-      <a href="#">প্রোফাইল</a>
-    </nav>
+<!-- Feed -->
+<div id="allPosts" class="feed"></div>
 
-  </section>
+<script>
+// ===== JS Function =====
+function createPost() {
+    const postText = document.getElementById("postText").value;
+    if(!postText) return alert("কিছু লিখুন!");
+    
+    // নতুন পোস্ট div তৈরি
+    const postDiv = document.createElement("div");
+    postDiv.className = "post-card";
 
-  <!-- ===== FEED ===== -->
-  <section class="feed">
-    <div class="post">
-      <h3>😊 রিয়া রহমান</h3>
-      <p>আজকের দিনটা অনেক সুন্দর 💖</p>
-      <div class="actions">
-        <button>❤️ রিয়াক্ট</button>
-        <button>💬 মন্তব্য</button>
-        <button>🔁 শেয়ার</button>
-      </div>
-    </div>
+    postDiv.innerHTML = `
+        <p>${postText}</p>
+        <div class="post-actions">
+            <button class="like-btn">❤️ Like</button>
+            <button class="comment-btn">💬 Comment</button>
+            <button class="buy-btn">🛒 Buy</button>
+        </div>
+    `;
 
-    <div class="post">
-      <h3>😎 হাসান হোসেন</h3>
-      <p>বন্ধুত্ব মানে শুধু হাসি নয়, বোঝাপড়া 💫</p>
-      <div class="actions">
-        <button>❤️ রিয়াক্ট</button>
-        <button>💬 মন্তব্য</button>
-        <button>🔁 শেয়ার</button>
-      </div>
-    </div>
-  </section>
+    document.getElementById("allPosts").prepend(postDiv);
+    document.getElementById("postText").value = "";
+}
+</script>
+
+</body>
+</html>
