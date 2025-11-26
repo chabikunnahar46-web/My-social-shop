@@ -1,7 +1,11 @@
-import { auth, rtdb } from "./Firebase.js";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } 
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+// scripts/auth.js
+import { auth } from './firebase.js';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
 
-document.getElementById("signupBtn").addEventListener("click", async () => {
-    let email = document.getElementById("email").value;
-    let pass  = document.getElementById("password").value;
+export function signup(email, password) {
+  return createUserWithEmailAndPassword(auth, email, password);
+}
+
+export function login(email, password) {
+  return signInWithEmailAndPassword(auth, email, password);
+}
