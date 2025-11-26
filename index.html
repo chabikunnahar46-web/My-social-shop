@@ -6,6 +6,32 @@
 <title>Bondhutto24 Home</title>
 <link rel="stylesheet" href="styles/style.css">
 </head>
+  <!-- index.html (HOME) -->
+<!-- ... তোমার existing HTML উপরে ... -->
+
+<!-- Mood selector + Feed -->
+<div class="mood-bar" style="text-align:center;padding:12px;background:#fff;border-bottom:1px solid #eee;">
+  <label for="moodSelect">আপনার মুড বেছে নিন: </label>
+  <select id="moodSelect" style="padding:8px;font-size:16px;">
+    <option value="all">🔎 সকল</option>
+    <option value="happy">😊 Happy</option>
+    <option value="sad">😔 Sad</option>
+    <option value="love">❤️ Love</option>
+    <option value="motivation">🔥 Motivation</option>
+    <option value="funny">🤣 Funny</option>
+  </select>
+  <button id="goMood" style="padding:8px 12px;margin-left:8px;">👉 Apply</button>
+  <a href="mood.html" style="margin-left:16px;">🔹 আলাদা Mood পেজ দেখতে ক্লিক করো</a>
+</div>
+
+<main id="feed" style="padding:16px;">
+  <!-- এখানে ফিড রেন্ডার হবে -->
+</main>
+
+<!-- Mood JS -->
+<script type="module" src="./scripts/mood.js"></script>
+</body>
+</html>
   <body>
   <!-- তোমার সমস্ত HTML কন্টেন্ট -->
 
