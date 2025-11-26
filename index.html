@@ -1,75 +1,26 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bondhutto24</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bondhutto24 Home</title>
+<link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-
-<!-- Top Bar -->
 <header class="fb-topbar">
-    <div class="logo">🤝 Bondhutto24</div>
-    <nav class="menu">
-        <a href="index.html" class="menu-item">🏠 হোম</a>
-        <a href="post.html" class="menu-item">📝 পোস্ট</a>
-        <a href="reels.html" class="menu-item">🎬 রিলস</a>
-        <a href="friends.html" class="menu-item">👥 বন্ধু</a>
-        <a href="notify.html" class="menu-item">🔔 নোটিফিকেশন</a>
-        <a href="Profile.html" class="menu-item">👤 প্রোফাইল</a>
-    </nav>
+  <div class="logo">🤝 Bondhutto24</div>
+  <nav>
+    <a href="index.html">🏠 হোম</a>
+    <a href="add-product.html">🛒 মার্কেট</a>
+    <a href="reels.html">🎬 রিলস</a>
+    <a href="profile.html">👤 প্রোফাইল</a>
+  </nav>
 </header>
 
-<!-- Post Box with Profile -->
-<div class="post-container">
-    <img src="profile.png" class="user-avatar" alt="User Profile">
-    <textarea id="postText" placeholder="আপনার মুড বা ভাব লিখুন..."></textarea>
-    <button class="post-btn" onclick="createPost()">📤 পোস্ট করুন</button>
-</div>
+<section id="feed">
+  <!-- Mixed Feed: Post + Product + Video -->
+</section>
 
-<!-- Feed -->
-<div id="allPosts" class="feed"></div>
-
-<script>
-// ===== JS Function =====
-function createPost() {
-    const postText = document.getElementById("postText").value;
-    if(!postText) return alert("কিছু লিখুন!");
-    
-    // User Info (temporary static for now)
-    const userName = "তোমার নাম";  // এখানে Firebase auth থেকে নাম নিতে পারবে
-    const userAvatar = "profile.png"; // এখানে Firebase auth photoURL নিতে পারবে
-    
-    // নতুন পোস্ট div তৈরি
-    const postDiv = document.createElement("div");
-    postDiv.className = "post-card";
-
-    postDiv.innerHTML = `
-        <div class="post-header">
-            <img src="${userAvatar}" class="post-avatar">
-            <span class="post-username">${userName}</span>
-        </div>
-        <p>${postText}</p>
-        <div class="post-actions">
-            <button class="like-btn">❤️ Like</button>
-            <button class="comment-btn">💬 Comment</button>
-            <button class="buy-btn">🛒 Buy</button>
-        </div>
-    `;
-
-    document.getElementById("allPosts").prepend(postDiv);
-    document.getElementById("postText").value = "";
-}
-</script>
-
+<script type="module" src="scripts/main.js"></script>
 </body>
 </html>
-<input id="username" placeholder="আপনার নাম দিন">
-<button onclick="createUser(document.getElementById('username').value)">Sign Up</button>
-
-<input id="loginId" placeholder="User ID দিন">
-<button onclick="login(document.getElementById('loginId').value)">Login</button>
-
-<script type="module" src="auth.js"></script>
-<script type="module" src="Firebase.js"></script>
