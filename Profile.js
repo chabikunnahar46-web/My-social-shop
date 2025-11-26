@@ -95,3 +95,68 @@ window.logout = function () {
         location.reload();
     });
 };
+import { auth, onAuthStateChanged, signOut } from './Firebase.js';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js";
+
+const storage = getStorage();
+
+onAuthStateChanged(auth, (user) => {
+    if(user) {
+        document.getElementById('username').innerText = user.displayName || "Bondhutto User";
+        document.getElementById('useremail').innerText = user.email;
+    } else {
+        window.location.href = "login.html";
+    }
+});
+
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', () => {
+    signOut(auth).then(() => window.location.href = "login.html");
+});
+
+// Change Display Name
+document.getElementById('changeNameBtn').addEventListener('click', () => {
+    const newName = document.getElementById('newName').value;
+    if(newName) {
+        auth.currentUser.updateProfile({ displayName: newName })
+            .then(() => alert("Name updated!"))
+            .catch(e => alert(e.message));
+    }
+});
+
+// Change Email
+document.getElementById('changeEmailBtn').addEventListener('click', () => {
+    const newEmail = document.getElementById('newEmail').value;
+    if(newEmail) {
+        auth.currentUser.updateEmail(newEmail)
+            .then(() => alert("Email updated!"))
+            .catch(e => alert(e.message));
+    }
+});
+
+// Change Password
+document.getElementById('changePasswordBtn').addEventListener('click', () => {
+    const newPassword = document.getElementById('newPassword').value;
+    if(newPassword) {
+        auth.currentUser.updatePassword(newPassword)
+            .then(() => alert("Password updated!"))
+            .catch(e => alert(e.message));
+    }
+});
+
+// Upload Profile Picture
+document.getElementById('uploadBtn').addEventListener('click', () => {
+    const file = document.getElementById('uploadPic').files[0];
+    if(file) {
+        const storageRef = ref(storage, 'profilePics/' + auth.currentUser.uid);
+        uploadBytes(storageRef, file).then(() => {
+            getDownloadURL(storageRef).then(url => {
+                auth.currentUser.updateProfile({ photoURL: url })
+                    .then(() => {
+                        document.getElementById('profilePic').src = url;
+                        alert("Profile picture updated!");
+                    });
+            });
+        });
+    }
+});
