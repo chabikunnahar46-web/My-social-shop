@@ -20,7 +20,12 @@
 </head>
 
 <body>
+<div class="post-box">
+    <textarea id="postText" placeholder="আপনার মুড বা ভাব লিখুন..."></textarea>
+    <button onclick="createPost()">📤 শেয়ার করুন</button>
+</div>
 
+<div id="allPosts"></div>
   <!-- ===== TOP BAR ===== -->
   <header class="topbar">
     <h1>🤝 Bondhutto24</h1>
@@ -60,23 +65,3 @@
       </div>
     </div>
   </section>
-
-
-  <!-- ===== SHOP FORM ===== -->
-  <h2>Add Item to Shop</h2>
-
-  <form id="shopForm">
-    <input id="itemName" placeholder="Item Name" required>
-    <input id="itemPrice" placeholder="Price" required>
-    <textarea id="itemDesc" placeholder="Description" required></textarea>
-    <input type="file" id="itemImage" accept="image/*" required>
-    <button type="submit">Add Item</button>
-  </form>
-
-  <h2>Shop Items</h2>
-  <div id="shopItems"></div>
-
-
-  <script src="script.js"></script>
-  <script type="module" src="shop.js"></script>
-
