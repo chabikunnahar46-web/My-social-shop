@@ -1,78 +1,37 @@
- /* Post Container */
-.post-container {
+/* Profile Page */
+.profile-container {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin: 20px;
+    gap: 20px;
+    padding: 30px;
 }
 
-.post-container textarea {
-    flex: 1;
-    height: 50px;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    resize: none;
+/* Circular container with polygon mask */
+.profile-pic-container {
+    width: 120px;
+    height: 120px;
+    clip-path: polygon(
+        50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%
+    ); /* এই কোড বহুভুজ তৈরি করবে */
+    overflow: hidden;
 }
 
-.user-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+.profile-pic-container img.profile-pic {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    display: block;
 }
 
-.post-btn {
-    background-color: #ff4500;
-    color: #fff;
-    border: none;
-    padding: 0 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-.post-btn:hover {
-    background-color: #e03e00;
-}
-
-/* Feed Posts */
-.post-card {
-    background-color: #fefefe;
-    margin: 10px 20px;
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
-}
-
-.post-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.post-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-
-.post-username {
+/* Profile Info */
+.profile-info h2 {
+    margin: 0;
+    font-size: 24px;
     font-weight: bold;
 }
 
-/* Actions Buttons */
-.post-actions button {
-    margin-right: 10px;
-    border: none;
-    padding: 5px 12px;
-    border-radius: 8px;
-    cursor: pointer;
+.profile-info p {
+    margin: 5px 0 0 0;
+    font-size: 16px;
+    color: #555;
 }
-
-.like-btn { background-color: #ff6961; color: #fff; }
-.comment-btn { background-color: #61a3ff; color: #fff; }
-.buy-btn { background-color: #ffa500; color: #fff; }
