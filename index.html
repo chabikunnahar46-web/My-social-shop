@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
@@ -21,8 +21,9 @@
     </nav>
 </header>
 
-<!-- Post Box with Button Inline -->
+<!-- Post Box with Profile -->
 <div class="post-container">
+    <img src="profile.png" class="user-avatar" alt="User Profile">
     <textarea id="postText" placeholder="আপনার মুড বা ভাব লিখুন..."></textarea>
     <button class="post-btn" onclick="createPost()">📤 পোস্ট করুন</button>
 </div>
@@ -36,11 +37,19 @@ function createPost() {
     const postText = document.getElementById("postText").value;
     if(!postText) return alert("কিছু লিখুন!");
     
+    // User Info (temporary static for now)
+    const userName = "তোমার নাম";  // এখানে Firebase auth থেকে নাম নিতে পারবে
+    const userAvatar = "profile.png"; // এখানে Firebase auth photoURL নিতে পারবে
+    
     // নতুন পোস্ট div তৈরি
     const postDiv = document.createElement("div");
     postDiv.className = "post-card";
 
     postDiv.innerHTML = `
+        <div class="post-header">
+            <img src="${userAvatar}" class="post-avatar">
+            <span class="post-username">${userName}</span>
+        </div>
         <p>${postText}</p>
         <div class="post-actions">
             <button class="like-btn">❤️ Like</button>
