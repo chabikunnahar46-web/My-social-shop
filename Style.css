@@ -1,6 +1,7 @@
-/* Post Container */
+ /* Post Container */
 .post-container {
     display: flex;
+    align-items: center;
     gap: 10px;
     margin: 20px;
 }
@@ -13,6 +14,13 @@
     border-radius: 10px;
     border: 1px solid #ccc;
     resize: none;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .post-btn {
@@ -39,6 +47,23 @@
     box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
 }
 
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.post-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.post-username {
+    font-weight: bold;
+}
+
 /* Actions Buttons */
 .post-actions button {
     margin-right: 10px;
@@ -50,4 +75,4 @@
 
 .like-btn { background-color: #ff6961; color: #fff; }
 .comment-btn { background-color: #61a3ff; color: #fff; }
-.buy-btn { background-color: #ffa500; color: #fff; } /* Shop style button */
+.buy-btn { background-color: #ffa500; color: #fff; }
