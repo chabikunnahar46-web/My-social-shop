@@ -1,75 +1,92 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bondhutto24 Home</title>
-<link rel="stylesheet" href="styles/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bondhutto24 Home</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
-  <!-- index.html (HOME) -->
-<!-- ... তোমার existing HTML উপরে ... -->
+<body>
 
-<!-- Mood selector + Feed -->
-<div class="mood-bar" style="text-align:center;padding:12px;background:#fff;border-bottom:1px solid #eee;">
-  <label for="moodSelect">আপনার মুড বেছে নিন: </label>
-  <select id="moodSelect" style="padding:8px;font-size:16px;">
-    <option value="all">🔎 সকল</option>
-    <option value="happy">😊 Happy</option>
-    <option value="sad">😔 Sad</option>
-    <option value="love">❤️ Love</option>
-    <option value="motivation">🔥 Motivation</option>
-    <option value="funny">🤣 Funny</option>
-  </select>
-  <button id="goMood" style="padding:8px 12px;margin-left:8px;">👉 Apply</button>
-  <a href="mood.html" style="margin-left:16px;">🔹 আলাদা Mood পেজ দেখতে ক্লিক করো</a>
+<!-- Top Navigation Bar -->
+<header class="topbar">
+    <div class="logo">🤝 Bondhutto24</div>
+    <nav class="menu">
+        <a href="index.html" class="menu-item">🏠 Home</a>
+        <a href="reels.html" class="menu-item">🎬 Reels</a>
+        <a href="friends.html" class="menu-item">👥 Friends</a>
+        <a href="skills.html" class="menu-item">🎓 Learning</a>
+    </nav>
+</header>
+
+<!-- Mood Selector -->
+<div class="mood-bar" style="text-align:center; padding:12px; background:#fff; border-bottom:1px solid #eee;">
+    <label for="moodSelect">Select your mood: </label>
+    <select id="moodSelect" style="padding:8px; font-size:16px;">
+        <option value="all">🔎 All</option>
+        <option value="happy">😊 Happy</option>
+        <option value="sad">😔 Sad</option>
+        <option value="love">❤️ Love</option>
+        <option value="motivation">🔥 Motivation</option>
+        <option value="funny">🤣 Funny</option>
+    </select>
+    <button id="goMood" style="padding:8px 12px; margin-left:8px;">👉 Apply</button>
+    <a href="mood.html" style="margin-left:16px;">🔹 View separate Mood page</a>
 </div>
 
-<main id="feed" style="padding:16px;">
-  <!-- এখানে ফিড রেন্ডার হবে -->
+<!-- Search Bar -->
+<div style="text-align:center; margin:20px 0;">
+    <input type="text" placeholder="Search..." style="padding:10px; width:60%; font-size:16px;">
+    <button style="padding:10px 16px; font-size:16px;">Search</button>
+</div>
+
+<!-- Main Feed -->
+<main id="feed" style="padding:16px; display:flex; flex-direction:column; gap:20px;">
+
+    <!-- Example Product -->
+    <div class="feed-item product">
+        <h3>Product Name</h3>
+        <p>Description of the product goes here.</p>
+        <p>Price: $49.99</p>
+        <div class="actions">
+            <button>❤️ Like</button>
+            <button>💬 Comment</button>
+            <button>🛒 Buy</button>
+            <button>🔁 Share</button>
+        </div>
+    </div>
+
+    <!-- Example Video -->
+    <div class="feed-item video">
+        <h3>Video Title</h3>
+        <video controls width="100%">
+            <source src="video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="actions">
+            <button>❤️ Like</button>
+            <button>💬 Comment</button>
+            <button>🔁 Share</button>
+        </div>
+    </div>
+
+    <!-- Example Image -->
+    <div class="feed-item image">
+        <h3>Image Caption</h3>
+        <img src="image.jpg" alt="Example Image" style="width:100%; border-radius:10px;">
+        <div class="actions">
+            <button>❤️ Like</button>
+            <button>💬 Comment</button>
+            <button>🔁 Share</button>
+        </div>
+    </div>
+
 </main>
 
 <!-- Mood JS -->
 <script type="module" src="./scripts/mood.js"></script>
-</body>
-  <div style="margin-top:20px; text-align:center;">
-    <a href="video.html" style="
-        padding:15px 25px;
-        background:#2196F3;
-        color:white;
-        text-decoration:none;
-        border-radius:10px;
-        font-size:22px;
-        font-weight:bold;
-        display:inline-block;
-    ">
-    🎬 Open Video Page
-    </a>
-  </div>
-</html>
-  <body>
-  <!-- তোমার সমস্ত HTML কন্টেন্ট -->
+<script type="module" src="./scripts/main.js"></script>
+<script type="module" src="./scripts/search.js"></script>
 
-  <!-- এখানে রাখবে স্ক্রিপ্ট -->
-  <script type="module" src="search.js"></script>
 </body>
 </html>
-<body>
-<header class="fb-topbar">
-  <div class="logo">🤝 Bondhutto24</div>
-  <nav>
-    <a href="index.html">🏠 হোম</a>
-    <a href="add-product.html">🛒 মার্কেট</a>
-    <a href="reels.html">🎬 রিলস</a>
-    <a href="profile.html">👤 প্রোফাইল</a>
-  </nav>
-</header>
-
-<section id="feed">
-  <!-- Mixed Feed: Post + Product + Video -->
-</section>
-
-<script type="module" src="scripts/main.js"></script>
-</body>
-</html>
-<script type="module" src="./scripts/mood.js"></script>
-<a href="skills.html">🎓 Skill Learning</a>
