@@ -7,27 +7,44 @@
 <link rel="stylesheet" href="style.css">
 <style>
   body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; }
-  header.topbar { display:flex; align-items:center; padding:10px 20px; background:#fff; border-bottom:1px solid #ddd; }
-  header .logo { font-size:24px; font-weight:bold; margin-right:40px; }
-  nav.menu { display:flex; gap:20px; }
-  nav.menu a { text-decoration:none; color:#333; font-size:16px; display:flex; align-items:center; gap:6px; }
+  header.topbar { display:flex; align-items:center; justify-content:space-between; padding:10px 20px; background:#fff; border-bottom:1px solid #ddd; position:sticky; top:0; z-index:100; }
+  header .logo { font-size:26px; font-weight:bold; color:#2196F3; }
+  nav.menu { display:flex; gap:20px; flex-wrap:wrap; }
+  nav.menu a { text-decoration:none; color:#333; font-size:16px; display:flex; align-items:center; gap:6px; transition:0.3s; }
+  nav.menu a:hover { color:#2196F3; }
   nav.menu a img { width:24px; height:24px; }
+
   .mood-bar { padding:12px 20px; background:#fff; border-bottom:1px solid #eee; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .mood-bar select, .mood-bar button { padding:8px; font-size:16px; }
-  .mood-bar button { background:rebeccapurple; color:white; border:none; border-radius:6px; cursor:pointer; font-weight:bold; }
+  .mood-bar button { background:rebeccapurple; color:white; border:none; border-radius:6px; cursor:pointer; font-weight:bold; transition:0.3s; }
+  .mood-bar button:hover { background:#7b1fa2; }
+
   .search-bar { padding:12px 20px; background:#fff; border-bottom:1px solid #eee; }
   .search-bar input { width:100%; padding:10px; font-size:16px; border:1px solid #ccc; border-radius:6px; }
+
   main#feed { padding:20px; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
-  .feed-item { background:#fff; border-radius:8px; padding:16px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
-  .feed-item h3 { margin-top:0; }
-  .feed-item p { margin:8px 0; }
-  .actions { display:flex; gap:10px; margin-top:10px; flex-wrap:wrap; }
-  .actions button { padding:6px 12px; border:none; border-radius:6px; cursor:pointer; }
-  .actions .like { background:#ff4d4f; color:white; }
-  .actions .comment { background:#1890ff; color:white; }
-  .actions .buy { background:#52c41a; color:white; }
-  .actions .share { background:#595959; color:white; }
+
+  .feed-item { background:#fff; border-radius:8px; padding:16px; box-shadow:0 2px 5px rgba(0,0,0,0.1); display:flex; flex-direction:column; }
+  .feed-item h3 { margin:0 0 8px 0; font-size:20px; color:#333; }
+  .feed-item p { margin:6px 0; color:#555; }
   .feed-item img, .feed-item video { width:100%; border-radius:8px; margin-top:8px; }
+
+  .actions { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
+  .actions button { padding:6px 12px; border:none; border-radius:6px; cursor:pointer; transition:0.3s; font-weight:bold; }
+  .actions .like { background:#ff4d4f; color:white; }
+  .actions .like:hover { background:#d9363e; }
+  .actions .comment { background:#1890ff; color:white; }
+  .actions .comment:hover { background:#096dd9; }
+  .actions .share { background:#595959; color:white; }
+  .actions .share:hover { background:#434343; }
+  .actions .buy { background:#52c41a; color:white; }
+  .actions .buy:hover { background:#389e0d; }
+
+  @media(max-width:600px){
+    nav.menu { gap:12px; font-size:14px; }
+    .mood-bar { flex-direction:column; align-items:flex-start; }
+    .search-bar input { font-size:14px; }
+  }
 </style>
 </head>
 <body>
@@ -58,13 +75,59 @@
 </div>
 
 <div class="search-bar">
-  <input type="text" id="searchInput" placeholder="Search...">
+  <input type="text" id="searchInput" placeholder="Search daily status...">
 </div>
 
 <main id="feed">
-  <!-- Feed will render dynamically -->
+  <!-- Dynamic Feed Example (JS will populate) -->
 </main>
 
-<script type="module" src="scripts/feed.js"></script>
+<script type="module">
+// scripts/feed.js
+
+const feedData = [
+  {type:'status', title:'Good Morning!', content:'Wishing everyone a productive day!', mood:'happy'},
+  {type:'video', title:'Motivational Video', src:'videos/motivation.mp4', mood:'motivation'},
+  {type:'image', title:'Beautiful Sunset', src:'images/sunset.jpg', mood:'love'},
+  {type:'product', title:'Online Course', content:'Learn React JS in 7 days', price:'$49.99', mood:'all'},
+];
+
+const feedContainer = document.getElementById('feed');
+const searchInput = document.getElementById('searchInput');
+const moodSelect = document.getElementById('moodSelect');
+const applyBtn = document.getElementById('applyMood');
+
+function renderFeed(filterMood = 'all', searchText=''){
+  feedContainer.innerHTML = '';
+  feedData.filter(item=>{
+    const matchesMood = filterMood==='all' || item.mood===filterMood;
+    const matchesSearch = item.title.toLowerCase().includes(searchText.toLowerCase());
+    return matchesMood && matchesSearch;
+  }).forEach(item=>{
+    const div = document.createElement('div');
+    div.className = 'feed-item';
+    let innerHTML = `<h3>${item.title}</h3>`;
+    if(item.type==='status') innerHTML += `<p>${item.content}</p>`;
+    if(item.type==='video') innerHTML += `<video controls><source src="${item.src}" type="video/mp4"></video>`;
+    if(item.type==='image') innerHTML += `<img src="${item.src}" alt="${item.title}">`;
+    if(item.type==='product') innerHTML += `<p>${item.content}</p><p>Price: ${item.price}</p>`;
+    
+    innerHTML += `<div class="actions">`;
+    innerHTML += `<button class="like">❤️ Like</button>`;
+    innerHTML += `<button class="comment">💬 Comment</button>`;
+    if(item.type==='product') innerHTML += `<button class="buy">🛒 Buy</button>`;
+    innerHTML += `<button class="share">🔁 Share</button></div>`;
+    
+    div.innerHTML = innerHTML;
+    feedContainer.appendChild(div);
+  });
+}
+
+applyBtn.addEventListener('click', ()=> renderFeed(moodSelect.value, searchInput.value));
+searchInput.addEventListener('input', ()=> renderFeed(moodSelect.value, searchInput.value));
+
+renderFeed();
+</script>
+
 </body>
-                               </html>
+</html>
