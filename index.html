@@ -1,92 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bondhutto24 Home</title>
-    <link rel="stylesheet" href="styles/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bondhutto24 Home</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; }
+  header.topbar { display:flex; align-items:center; padding:10px 20px; background:#fff; border-bottom:1px solid #ddd; }
+  header .logo { font-size:24px; font-weight:bold; margin-right:40px; }
+  nav.menu { display:flex; gap:20px; }
+  nav.menu a { text-decoration:none; color:#333; font-size:16px; display:flex; align-items:center; gap:6px; }
+  nav.menu a img { width:24px; height:24px; }
+  .mood-bar { padding:12px 20px; background:#fff; border-bottom:1px solid #eee; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .mood-bar select, .mood-bar button { padding:8px; font-size:16px; }
+  .mood-bar button { background:rebeccapurple; color:white; border:none; border-radius:6px; cursor:pointer; font-weight:bold; }
+  .search-bar { padding:12px 20px; background:#fff; border-bottom:1px solid #eee; }
+  .search-bar input { width:100%; padding:10px; font-size:16px; border:1px solid #ccc; border-radius:6px; }
+  main#feed { padding:20px; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+  .feed-item { background:#fff; border-radius:8px; padding:16px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+  .feed-item h3 { margin-top:0; }
+  .feed-item p { margin:8px 0; }
+  .actions { display:flex; gap:10px; margin-top:10px; flex-wrap:wrap; }
+  .actions button { padding:6px 12px; border:none; border-radius:6px; cursor:pointer; }
+  .actions .like { background:#ff4d4f; color:white; }
+  .actions .comment { background:#1890ff; color:white; }
+  .actions .buy { background:#52c41a; color:white; }
+  .actions .share { background:#595959; color:white; }
+  .feed-item img, .feed-item video { width:100%; border-radius:8px; margin-top:8px; }
+</style>
 </head>
 <body>
 
-<!-- Top Navigation Bar -->
 <header class="topbar">
-    <div class="logo">🤝 Bondhutto24</div>
-    <nav class="menu">
-        <a href="index.html" class="menu-item">🏠 Home</a>
-        <a href="reels.html" class="menu-item">🎬 Reels</a>
-        <a href="friends.html" class="menu-item">👥 Friends</a>
-        <a href="skills.html" class="menu-item">🎓 Learning</a>
-    </nav>
+  <div class="logo">Bondhutto24</div>
+  <nav class="menu">
+    <a href="index.html"><img src="icons/home.png" alt=""> Home</a>
+    <a href="reels.html"><img src="icons/video.png" alt=""> Reels</a>
+    <a href="friends.html"><img src="icons/friends.png" alt=""> Friends</a>
+    <a href="skills.html"><img src="icons/learning.png" alt=""> Learning</a>
+    <a href="profile.html"><img src="icons/profile.png" alt=""> Profile</a>
+  </nav>
 </header>
 
-<!-- Mood Selector -->
-<div class="mood-bar" style="text-align:center; padding:12px; background:#fff; border-bottom:1px solid #eee;">
-    <label for="moodSelect">Select your mood: </label>
-    <select id="moodSelect" style="padding:8px; font-size:16px;">
-        <option value="all">🔎 All</option>
-        <option value="happy">😊 Happy</option>
-        <option value="sad">😔 Sad</option>
-        <option value="love">❤️ Love</option>
-        <option value="motivation">🔥 Motivation</option>
-        <option value="funny">🤣 Funny</option>
-    </select>
-    <button id="goMood" style="padding:8px 12px; margin-left:8px;">👉 Apply</button>
-    <a href="mood.html" style="margin-left:16px;">🔹 View separate Mood page</a>
+<div class="mood-bar">
+  <label for="moodSelect">Select your mood:</label>
+  <select id="moodSelect">
+    <option value="all">All</option>
+    <option value="happy">Happy</option>
+    <option value="sad">Sad</option>
+    <option value="love">Love</option>
+    <option value="motivation">Motivation</option>
+    <option value="funny">Funny</option>
+  </select>
+  <button id="applyMood">Apply</button>
+  <a href="mood.html">View separate Mood page</a>
 </div>
 
-<!-- Search Bar -->
-<div style="text-align:center; margin:20px 0;">
-    <input type="text" placeholder="Search..." style="padding:10px; width:60%; font-size:16px;">
-    <button style="padding:10px 16px; font-size:16px;">Search</button>
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Search...">
 </div>
 
-<!-- Main Feed -->
-<main id="feed" style="padding:16px; display:flex; flex-direction:column; gap:20px;">
-
-    <!-- Example Product -->
-    <div class="feed-item product">
-        <h3>Product Name</h3>
-        <p>Description of the product goes here.</p>
-        <p>Price: $49.99</p>
-        <div class="actions">
-            <button>❤️ Like</button>
-            <button>💬 Comment</button>
-            <button>🛒 Buy</button>
-            <button>🔁 Share</button>
-        </div>
-    </div>
-
-    <!-- Example Video -->
-    <div class="feed-item video">
-        <h3>Video Title</h3>
-        <video controls width="100%">
-            <source src="video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div class="actions">
-            <button>❤️ Like</button>
-            <button>💬 Comment</button>
-            <button>🔁 Share</button>
-        </div>
-    </div>
-
-    <!-- Example Image -->
-    <div class="feed-item image">
-        <h3>Image Caption</h3>
-        <img src="image.jpg" alt="Example Image" style="width:100%; border-radius:10px;">
-        <div class="actions">
-            <button>❤️ Like</button>
-            <button>💬 Comment</button>
-            <button>🔁 Share</button>
-        </div>
-    </div>
-
+<main id="feed">
+  <!-- Feed will render dynamically -->
 </main>
 
-<!-- Mood JS -->
-<script type="module" src="./scripts/mood.js"></script>
-<script type="module" src="./scripts/main.js"></script>
-<script type="module" src="./scripts/search.js"></script>
-
+<script type="module" src="scripts/feed.js"></script>
 </body>
-</html>
+                               </html>
