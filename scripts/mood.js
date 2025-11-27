@@ -117,3 +117,104 @@ document.addEventListener("DOMContentLoaded", () => {
     // প্রথমে সব পোস্ট দেখাও
     loadMoodPosts("all");
 });
+// mood.js
+
+const feedData = [
+  {
+    type: "product",
+    title: "Gaming Headset",
+    description: "High-quality surround sound headset.",
+    price: 49.99,
+    mood: "happy"
+  },
+  {
+    type: "video",
+    title: "Motivational Video",
+    src: "videos/motivation.mp4",
+    mood: "motivation"
+  },
+  {
+    type: "image",
+    title: "Beautiful Sunset",
+    src: "images/sunset.jpg",
+    mood: "love"
+  },
+  {
+    type: "product",
+    title: "Smart Watch",
+    description: "Track your health and notifications.",
+    price: 99.99,
+    mood: "funny"
+  }
+];
+
+const feedContainer = document.getElementById("feed");
+const moodSelect = document.getElementById("moodSelect");
+const applyBtn = document.getElementById("applyMood");
+const searchInput = document.getElementById("searchInput");
+
+function renderFeed(items) {
+  feedContainer.innerHTML = "";
+  items.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "feed-item";
+
+    if(item.type === "product") {
+      div.innerHTML = `
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+        <p>Price: $${item.price}</p>
+        <div class="actions">
+          <button class="like">❤️ Like</button>
+          <button class="comment">💬 Comment</button>
+          <button class="buy">🛒 Buy</button>
+          <button class="share">🔁 Share</button>
+        </div>
+      `;
+    }
+    else if(item.type === "video") {
+      div.innerHTML = `
+        <h3>${item.title}</h3>
+        <video controls>
+          <source src="${item.src}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="actions">
+          <button class="like">❤️ Like</button>
+          <button class="comment">💬 Comment</button>
+          <button class="share">🔁 Share</button>
+        </div>
+      `;
+    }
+    else if(item.type === "image") {
+      div.innerHTML = `
+        <h3>${item.title}</h3>
+        <img src="${item.src}" alt="${item.title}">
+        <div class="actions">
+          <button class="like">❤️ Like</button>
+          <button class="comment">💬 Comment</button>
+          <button class="share">🔁 Share</button>
+        </div>
+      `;
+    }
+
+    feedContainer.appendChild(div);
+  });
+}
+
+// Initial render
+renderFeed(feedData);
+
+// Mood filter
+applyBtn.addEventListener("click", () => {
+  const mood = moodSelect.value;
+  const filtered = mood === "all" ? feedData : feedData.filter(item => item.mood === mood);
+  renderFeed(filtered);
+});
+
+// Search filter
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase();
+  const filtered = feedData.filter(item => item.title.toLowerCase().includes(query));
+  renderFeed(filtered);
+});
