@@ -46,36 +46,7 @@
     .search-bar input { font-size:14px; }
   }
 </style>
-  .comment-box {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-#commentInput {
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    resize: none;
-}
-
-#postComment {
-    padding: 10px;
-    background: #1877f2;
-    color: white;
-    border: none;
-    border-radius: 8px;
-}
-
-.comment {
-    background: #f0f2f5;
-    padding: 12px;
-    margin-top: 10px;
-    border-radius: 10px;
-}
-</head>
-  <div class="comment-box">
+  -bdiv <div class="comment-box">
     <textarea id="commentInput" placeholder="Write a comment..."></textarea>
     <button id="postComment">Post</button>
 </div>
@@ -162,21 +133,11 @@ searchInput.addEventListener('input', ()=> renderFeed(moodSelect.value, searchIn
 
 renderFeed();
 </script>
-  document.getElementById("postComment").addEventListener("click", () => {
-    const input = document.getElementById("commentInput");
-    const commentText = input.value.trim();
+  
 
-    if (commentText === "") return;
+    
 
-    const commentList = document.getElementById("commentList");
-
-    const newComment = document.createElement("div");
-    newComment.className = "comment";
-    newComment.innerText = commentText;
-
-    commentList.prepend(newComment);
-
-    input.value = "";
+    
 });
 
 </body\>
