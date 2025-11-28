@@ -1,31 +1,40 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Signup - Bondhutto24</title>
+<title>Create Account</title>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"></script>
+<script type="module" src="firebase.js"></script>
 </head>
+
 <body>
 <h2>Create Account</h2>
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="password" placeholder="Password">
-<button id="signupBtn">Sign Up</button>
+
+<input id="name" placeholder="Full Name"><br><br>
+<input id="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
+<button id="signupBtn">Create Account</button>
 
 <script type="module">
-import { auth, createUserWithEmailAndPassword, sendEmailVerification } from './Firebase.js';
+import { auth, db } from './firebase.js';
+import { setDoc, doc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-document.getElementById('signupBtn').addEventListener('click', async () => {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        await sendEmailVerification(userCredential.user);
-        alert("Account created! Check your email to verify.");
-        window.location.href = "login.html";
-    } catch (error) {
-        alert(error.message);
-    }
-});
+document.getElementById("signupBtn").onclick = async () => {
+  const name = name.value;
+  const email = email.value;
+  const pass = password.value;
+
+  const user = await auth.createUserWithEmailAndPassword(email, pass);
+
+  await setDoc(doc(db, "users", user.user.uid), {
+    name: name,
+    email: email
+  });
+
+  window.location.href = "login.html";
+};
 </script>
+
 </body>
 </html>
