@@ -19,6 +19,10 @@ async function loginUser() {
     } catch (err) {
         alert("Login Failed: " + err.message);
     }
-}
-
-window.loginUser = loginUser; // HTML onclick থেকে access করার জন্য
+}let accounts = JSON.parse(localStorage.getItem("savedAccounts")) || [];
+accounts.push({
+    name: userName,
+    email: email,
+    photo: userPhotoURL
+});
+localStorage.setItem("savedAccounts", JSON.stringify(accounts));
