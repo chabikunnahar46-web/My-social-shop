@@ -1,39 +1,41 @@
-import { db } from './firebase.js';
-import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+import { auth, db } from './firebase.js';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
 
-const feed = document.getElementById('feed');
+// Signup
+window.signup = async (email, password) => {
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    alert("Signup successful!");
+  } catch (err) { alert(err.message); }
+};
 
-async function loadFeed() {
-  feed.innerHTML = '';
+// Login
+window.login = async (email, password) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert("Login successful!");
+  } catch (err) { alert(err.message); }
+};
 
-  // Load latest post
-  const postSnap = await getDocs(query(collection(db, 'posts'), orderBy('createdAt', 'desc')));
-  postSnap.forEach(doc => {
-    const data = doc.data();
-    const div = document.createElement('div');
-    div.innerHTML = `<h3>${data.userName}</h3><p>${data.caption}</p>`;
-    feed.appendChild(div);
+// Save Post
+window.savePost = async (message) => {
+  try {
+    await addDoc(collection(db, "feed/Posts"), {
+      message,
+      timestamp: Date.now()
+    });
+    alert("Post saved!");
+  } catch(err) { alert(err.message); }
+};
+
+// Fetch Posts
+window.fetchPosts = async () => {
+  const querySnapshot = await getDocs(collection(db, "feed/Posts"));
+  querySnapshot.forEach((doc) => {
+    console.log(doc.data());
   });
-
-  // Load latest product
-  const prodSnap = await getDocs(query(collection(db, 'products'), orderBy('createdAt', 'desc')));
-  prodSnap.forEach(doc => {
-    const data = doc.data();
-    const div = document.createElement('div');
-    div.innerHTML = `<h3>${data.name} - ${data.price}৳</h3>
-                     <p>${data.desc}</p>
-                     <button onclick="window.location.href='add-product.html'">Buy Now</button>`;
-    feed.appendChild(div);
-  });
-
-  // Load latest video
-  const reelSnap = await getDocs(query(collection(db, 'reels'), orderBy('createdAt', 'desc')));
-  reelSnap.forEach(doc => {
-    const data = doc.data();
-    const div = document.createElement('div');
-    div.innerHTML = `<video src="${data.videoUrl}" controls></video>`;
-    feed.appendChild(div);
-  });
-}
-
-loadFeed();
+};body { font-family: Arial; padding: 20px; }
+input { margin: 5px 0; padding: 5px; }
+button { margin: 5px 0; padding: 5px 10px; cursor: pointer; }
+h2 { margin-top: 20px; }
