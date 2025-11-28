@@ -1,9 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head><title>Home</title></head>
+<head>
+    <title>Bondhutto24 - Home</title>
+    <style>
+        body{ font-family: Arial; margin:20px; }
+        img{ width:80px; border-radius:50%; }
+    </style>
+</head>
 <body>
 
-<h2>Welcome to Bondhutto24</h2>
+<h1>Welcome to Bondhutto24</h1>
+
+<div id="userInfo"></div>
+
+<script>
+    let accounts = JSON.parse(localStorage.getItem("savedAccounts")) || [];
+    let lastUser = accounts[accounts.length - 1];
+
+    document.getElementById("userInfo").innerHTML = `
+        <h2>${lastUser.name}</h2>
+        <p>${lastUser.email}</p>
+        <img src="${lastUser.photo}">
+    `;
+</script>
 
 </body>
 </html>
