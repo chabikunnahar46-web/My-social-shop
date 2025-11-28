@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -170,7 +170,6 @@
         cursor: pointer;
     }
 
-    /* ================= Profile Header ================= */
     .profile-header {
         background-color: white;
         border-radius: 10px;
@@ -192,7 +191,6 @@
         font-weight: bold;
     }
 
-    /* Scrollbar styling */
     .story-bar::-webkit-scrollbar {
         height: 6px;
     }
@@ -201,7 +199,6 @@
         background-color: #ccc;
         border-radius: 3px;
     }
-
 </style>
 </head>
 <body>
@@ -284,6 +281,19 @@
         </div>
     </div>
 </div>
+
+<!-- Firebase Scripts -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
+<script src="Firebase.js"></script>
+<script>
+  // Check if user is logged in
+  auth.onAuthStateChanged(user => {
+    if(!user){
+      window.location.href = "Login.html"; // লগইন না করলে homepage দেখাবে না
+    }
+  });
+</script>
 
 </body>
 </html>
