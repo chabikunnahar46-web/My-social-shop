@@ -3,147 +3,287 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bondhutto24 Home</title>
-<link rel="stylesheet" href="style.css">
+<title>Bondhutto24 - Social Platform</title>
 <style>
-  body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; }
-  header.topbar { display:flex; align-items:center; justify-content:space-between; padding:10px 20px; background:#fff; border-bottom:1px solid #ddd; position:sticky; top:0; z-index:100; }
-  header .logo { font-size:26px; font-weight:bold; color:#2196F3; }
-  nav.menu { display:flex; gap:20px; flex-wrap:wrap; }
-  nav.menu a { text-decoration:none; color:#333; font-size:16px; display:flex; align-items:center; gap:6px; transition:0.3s; }
-  nav.menu a:hover { color:#2196F3; }
-  nav.menu a img { width:24px; height:24px; }
+    /* ================= Body ================= */
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f2f5;
+    }
 
-  .mood-bar { padding:12px 20px; background:#fff; border-bottom:1px solid #eee; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-  .mood-bar select, .mood-bar button { padding:8px; font-size:16px; }
-  .mood-bar button { background:rebeccapurple; color:white; border:none; border-radius:6px; cursor:pointer; font-weight:bold; transition:0.3s; }
-  .mood-bar button:hover { background:#7b1fa2; }
+    /* ================= YouTube-style Navbar ================= */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 10px 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
 
-  .search-bar { padding:12px 20px; background:#fff; border-bottom:1px solid #eee; }
-  .search-bar input { width:100%; padding:10px; font-size:16px; border:1px solid #ccc; border-radius:6px; }
+    .navbar .logo {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #ff0000; /* YouTube red */
+    }
 
-  main#feed { padding:20px; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+    .navbar input[type="text"] {
+        padding: 5px 10px;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        width: 300px;
+    }
 
-  .feed-item { background:#fff; border-radius:8px; padding:16px; box-shadow:0 2px 5px rgba(0,0,0,0.1); display:flex; flex-direction:column; }
-  .feed-item h3 { margin:0 0 8px 0; font-size:20px; color:#333; }
-  .feed-item p { margin:6px 0; color:#555; }
-  .feed-item img, .feed-item video { width:100%; border-radius:8px; margin-top:8px; }
+    .icons-youtube {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
 
-  .actions { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
-  .actions button { padding:6px 12px; border:none; border-radius:6px; cursor:pointer; transition:0.3s; font-weight:bold; }
-  .actions .like { background:#ff4d4f; color:white; }
-  .actions .like:hover { background:#d9363e; }
-  .actions .comment { background:#1890ff; color:white; }
-  .actions .comment:hover { background:#096dd9; }
-  .actions .share { background:#595959; color:white; }
-  .actions .share:hover { background:#434343; }
-  .actions .buy { background:#52c41a; color:white; }
-  .actions .buy:hover { background:#389e0d; }
+    .icons-youtube .icon {
+        font-size: 1.5em;
+        cursor: pointer;
+        position: relative;
+        padding: 8px;
+        border-radius: 50%;
+        transition: background 0.2s;
+    }
 
-  @media(max-width:600px){
-    nav.menu { gap:12px; font-size:14px; }
-    .mood-bar { flex-direction:column; align-items:flex-start; }
-    .search-bar input { font-size:14px; }
-  }
+    .icons-youtube .icon:hover {
+        background-color: #f2f2f2;
+    }
+
+    .icons-youtube .icon.active {
+        color: #ff0000; /* Active icon red */
+    }
+
+    .icons-youtube .notification .badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: red;
+        color: white;
+        font-size: 0.6em;
+        padding: 2px 5px;
+        border-radius: 50%;
+    }
+
+    /* ================= Sidebar ================= */
+    .container {
+        display: flex;
+        max-width: 1200px;
+        margin: 20px auto;
+    }
+
+    .sidebar {
+        width: 250px;
+        background-color: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-right: 20px;
+        height: fit-content;
+    }
+
+    .sidebar h3 {
+        margin-top: 0;
+        color: #ff0000;
+    }
+
+    .sidebar ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .sidebar ul li {
+        margin: 10px 0;
+        cursor: pointer;
+    }
+
+    /* ================= Main Feed ================= */
+    .main-feed {
+        flex: 1;
+    }
+
+    .story-bar {
+        display: flex;
+        overflow-x: auto;
+        margin-bottom: 20px;
+    }
+
+    .story {
+        min-width: 100px;
+        height: 150px;
+        background-color: #e4e6eb;
+        border-radius: 10px;
+        margin-right: 10px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        font-weight: bold;
+        padding: 5px;
+        color: #050505;
+        cursor: pointer;
+    }
+
+    .post {
+        background-color: white;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .post-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .post-header img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .post-header div {
+        font-weight: bold;
+    }
+
+    .post-content {
+        margin-bottom: 10px;
+    }
+
+    .post-actions {
+        display: flex;
+        justify-content: space-around;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+        font-weight: bold;
+        color: #65676b;
+    }
+
+    .post-actions span {
+        cursor: pointer;
+    }
+
+    /* ================= Profile Header ================= */
+    .profile-header {
+        background-color: white;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .profile-header img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-right: 20px;
+    }
+
+    .profile-header div {
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    /* Scrollbar styling */
+    .story-bar::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .story-bar::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 3px;
+    }
+
 </style>
-  -bdiv <div class="comment-box">
-    <textarea id="commentInput" placeholder="Write a comment..."></textarea>
-    <button id="postComment">Post</button>
-</div>
-
-<div id="commentList"></div>
+</head>
 <body>
 
-<header class="topbar">
-  <div class="logo">Bondhutto24</div>
-  <nav class="menu">
-    <a href="index.html"><img src="icons/home.png" alt=""> Home</a>
-    <a href="reels.html"><img src="icons/video.png" alt=""> Reels</a>
-    <a href="friends.html"><img src="icons/friends.png" alt=""> Friends</a>
-    <a href="skills.html"><img src="icons/learning.png" alt=""> Learning</a>
-    <a href="profile.html"><img src="icons/profile.png" alt=""> Profile</a>
-  </nav>
-</header>
-
-<div class="mood-bar">
-  <label for="moodSelect">Select your mood:</label>
-  <select id="moodSelect">
-    <option value="all">All</option>
-    <option value="happy">Happy</option>
-    <option value="sad">Sad</option>
-    <option value="love">Love</option>
-    <option value="motivation">Motivation</option>
-    <option value="funny">Funny</option>
-  </select>
-  <button id="applyMood">Apply</button>
-  <a href="mood.html">View separate Mood page</a>
+<!-- Navbar -->
+<div class="navbar">
+    <div class="logo">Bondhutto24</div>
+    <input type="text" placeholder="Search...">
+    <div class="icons-youtube">
+        <span class="icon active">🏠</span>
+        <span class="icon">📤</span>
+        <span class="icon">🎬</span>
+        <span class="icon">👥</span>
+        <span class="icon notification">🔔<span class="badge">3</span></span>
+        <span class="icon">👤</span>
+    </div>
 </div>
 
-<div class="search-bar">
-  <input type="text" id="searchInput" placeholder="Search daily status...">
+<!-- Main Container -->
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Menu</h3>
+        <ul>
+            <li>🏠 Home</li>
+            <li>👤 Profile</li>
+            <li>👥 Friends</li>
+            <li>🎬 Reels</li>
+            <li>📤 Messages</li>
+            <li>🔔 Notifications</li>
+        </ul>
+    </div>
+
+    <!-- Main Feed -->
+    <div class="main-feed">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <img src="https://via.placeholder.com/80" alt="Profile">
+            <div>Ria Rahman</div>
+        </div>
+
+        <!-- Story Bar -->
+        <div class="story-bar">
+            <div class="story">Ria</div>
+            <div class="story">Hasan</div>
+            <div class="story">Nabila</div>
+            <div class="story">Sabbir</div>
+            <div class="story">Tania</div>
+        </div>
+
+        <!-- Posts -->
+        <div class="post">
+            <div class="post-header">
+                <img src="https://via.placeholder.com/40" alt="Profile">
+                <div>Ria Rahman</div>
+            </div>
+            <div class="post-content">
+                আজকের দিনটা অনেক সুন্দর 💖
+            </div>
+            <div class="post-actions">
+                <span>❤️ Like</span>
+                <span>💬 Comment</span>
+                <span>🔁 Share</span>
+            </div>
+        </div>
+
+        <div class="post">
+            <div class="post-header">
+                <img src="https://via.placeholder.com/40" alt="Profile">
+                <div>Hasan Hosen</div>
+            </div>
+            <div class="post-content">
+                বন্ধুত্ব মানে শুধু হাসি নয়, বোঝাপড়া 💫
+            </div>
+            <div class="post-actions">
+                <span>❤️ Like</span>
+                <span>💬 Comment</span>
+                <span>🔁 Share</span>
+            </div>
+        </div>
+    </div>
 </div>
 
-<main id="feed">
-  <!-- Dynamic Feed Example (JS will populate) -->
-</main>
-
-<script type="module">
-// scripts/feed.js
-
-const feedData = [
-  {type:'status', title:'Good Morning!', content:'Wishing everyone a productive day!', mood:'happy'},
-  {type:'video', title:'Motivational Video', src:'videos/motivation.mp4', mood:'motivation'},
-  {type:'image', title:'Beautiful Sunset', src:'images/sunset.jpg', mood:'love'},
-  {type:'product', title:'Online Course', content:'Learn React JS in 7 days', price:'$49.99', mood:'all'},
-];
-
-const feedContainer = document.getElementById('feed');
-const searchInput = document.getElementById('searchInput');
-const moodSelect = document.getElementById('moodSelect');
-const applyBtn = document.getElementById('applyMood');
-
-function renderFeed(filterMood = 'all', searchText=''){
-  feedContainer.innerHTML = '';
-  feedData.filter(item=>{
-    const matchesMood = filterMood==='all' || item.mood===filterMood;
-    const matchesSearch = item.title.toLowerCase().includes(searchText.toLowerCase());
-    return matchesMood && matchesSearch;
-  }).forEach(item=>{
-    const div = document.createElement('div');
-    div.className = 'feed-item';
-    let innerHTML = `<h3>${item.title}</h3>`;
-    if(item.type==='status') innerHTML += `<p>${item.content}</p>`;
-    if(item.type==='video') innerHTML += `<video controls><source src="${item.src}" type="video/mp4"></video>`;
-    if(item.type==='image') innerHTML += `<img src="${item.src}" alt="${item.title}">`;
-    if(item.type==='product') innerHTML += `<p>${item.content}</p><p>Price: ${item.price}</p>`;
-    
-    innerHTML += `<div class="actions">`;
-    innerHTML += `<button class="like">❤️ Like</button>`;
-    innerHTML += `<button class="comment">💬 Comment</button>`;
-    if(item.type==='product') innerHTML += `<button class="buy">🛒 Buy</button>`;
-    innerHTML += `<button class="share">🔁 Share</button></div>`;
-    
-    div.innerHTML = innerHTML;
-    feedContainer.appendChild(div);
-  });
-}
-
-applyBtn.addEventListener('click', ()=> renderFeed(moodSelect.value, searchInput.value));
-searchInput.addEventListener('input', ()=> renderFeed(moodSelect.value, searchInput.value));
-
-renderFeed();
-</script>
-  
-
-    
-
-    
-});
-
-</body\>
+</body>
 </html>
-<script src="Firebase.js"></script>
-<script src="auth.js"></script>
-<script src="Main.js"></script>
-<script type="module" src="Firebase.js"></script>
-<script type="module" src="Upload.js"></script>
