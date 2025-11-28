@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bondhutto24</title>
-    <style>
-        body{
-            font-family: Arial;
-            text-align:center;
-            margin-top: 100px;
-        }
-        .box{
-            padding:20px;
-        }
-        button{
-            padding:10px 20px;
-            font-size:18px;
-        }
-    </style>
+  <title>My Social Shop</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Bondhutto24</h1>
-    <p>Connect with friends and the world around you.</p>
+<h2>Sign Up</h2>
+<input id="signupEmail" placeholder="Email">
+<input id="signupPassword" type="password" placeholder="Password">
+<button onclick="signup(document.getElementById('signupEmail').value, document.getElementById('signupPassword').value)">Sign Up</button>
 
-    <button onclick="window.location='signup.html'">
-        Create Account
-    </button>
+<h2>Login</h2>
+<input id="loginEmail" placeholder="Email">
+<input id="loginPassword" type="password" placeholder="Password">
+<button onclick="login(document.getElementById('loginEmail').value, document.getElementById('loginPassword').value)">Login</button>
 
+<h2>Create Post</h2>
+<input id="postMessage" placeholder="Write something...">
+<button onclick="savePost(document.getElementById('postMessage').value)">Post</button>
+
+<h2>All Posts (Check Console)</h2>
+<button onclick="fetchPosts()">Fetch Posts</button>
+
+<script type="module" src="main.js"></script>
 </body>
 </html>
-<button id="signupBtn">Create Account</button>
