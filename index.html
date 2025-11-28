@@ -1,299 +1,73 @@
- <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bondhutto24 - Social Platform</title>
-<style>
-    /* ================= Body ================= */
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f0f2f5;
-    }
+<title>Bondhutto24</title>
 
-    /* ================= YouTube-style Navbar ================= */
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: white;
-        padding: 10px 20px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
-
-    .navbar .logo {
-        font-size: 1.5em;
-        font-weight: bold;
-        color: #ff0000; /* YouTube red */
-    }
-
-    .navbar input[type="text"] {
-        padding: 5px 10px;
-        border-radius: 20px;
-        border: 1px solid #ccc;
-        width: 300px;
-    }
-
-    .icons-youtube {
-        display: flex;
-        gap: 20px;
-        align-items: center;
-    }
-
-    .icons-youtube .icon {
-        font-size: 1.5em;
-        cursor: pointer;
-        position: relative;
-        padding: 8px;
-        border-radius: 50%;
-        transition: background 0.2s;
-    }
-
-    .icons-youtube .icon:hover {
-        background-color: #f2f2f2;
-    }
-
-    .icons-youtube .icon.active {
-        color: #ff0000; /* Active icon red */
-    }
-
-    .icons-youtube .notification .badge {
-        position: absolute;
-        top: 0;
-        right: 0;
-        background: red;
-        color: white;
-        font-size: 0.6em;
-        padding: 2px 5px;
-        border-radius: 50%;
-    }
-
-    /* ================= Sidebar ================= */
-    .container {
-        display: flex;
-        max-width: 1200px;
-        margin: 20px auto;
-    }
-
-    .sidebar {
-        width: 250px;
-        background-color: white;
-        padding: 15px;
-        border-radius: 10px;
-        margin-right: 20px;
-        height: fit-content;
-    }
-
-    .sidebar h3 {
-        margin-top: 0;
-        color: #ff0000;
-    }
-
-    .sidebar ul {
-        list-style: none;
-        padding-left: 0;
-    }
-
-    .sidebar ul li {
-        margin: 10px 0;
-        cursor: pointer;
-    }
-
-    /* ================= Main Feed ================= */
-    .main-feed {
-        flex: 1;
-    }
-
-    .story-bar {
-        display: flex;
-        overflow-x: auto;
-        margin-bottom: 20px;
-    }
-
-    .story {
-        min-width: 100px;
-        height: 150px;
-        background-color: #e4e6eb;
-        border-radius: 10px;
-        margin-right: 10px;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        font-weight: bold;
-        padding: 5px;
-        color: #050505;
-        cursor: pointer;
-    }
-
-    .post {
-        background-color: white;
-        border-radius: 10px;
-        padding: 15px;
-        margin-bottom: 20px;
-    }
-
-    .post-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-
-    .post-header img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-right: 10px;
-    }
-
-    .post-header div {
-        font-weight: bold;
-    }
-
-    .post-content {
-        margin-bottom: 10px;
-    }
-
-    .post-actions {
-        display: flex;
-        justify-content: space-around;
-        border-top: 1px solid #ccc;
-        padding-top: 10px;
-        font-weight: bold;
-        color: #65676b;
-    }
-
-    .post-actions span {
-        cursor: pointer;
-    }
-
-    .profile-header {
-        background-color: white;
-        border-radius: 10px;
-        padding: 15px;
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-    }
-
-    .profile-header img {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        margin-right: 20px;
-    }
-
-    .profile-header div {
-        font-size: 1.2em;
-        font-weight: bold;
-    }
-
-    .story-bar::-webkit-scrollbar {
-        height: 6px;
-    }
-
-    .story-bar::-webkit-scrollbar-thumb {
-        background-color: #ccc;
-        border-radius: 3px;
-    }
-</style>
-</head>
-<body>
-
-<!-- Navbar -->
-<div class="navbar">
-    <div class="logo">Bondhutto24</div>
-    <input type="text" placeholder="Search...">
-    <div class="icons-youtube">
-        <span class="icon active">🏠</span>
-        <span class="icon">📤</span>
-        <span class="icon">🎬</span>
-        <span class="icon">👥</span>
-        <span class="icon notification">🔔<span class="badge">3</span></span>
-        <span class="icon">👤</span>
-    </div>
-</div>
-
-<!-- Main Container -->
-<div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h3>Menu</h3>
-        <ul>
-            <li>🏠 Home</li>
-            <li>👤 Profile</li>
-            <li>👥 Friends</li>
-            <li>🎬 Reels</li>
-            <li>📤 Messages</li>
-            <li>🔔 Notifications</li>
-        </ul>
-    </div>
-
-    <!-- Main Feed -->
-    <div class="main-feed">
-        <!-- Profile Header -->
-        <div class="profile-header">
-            <img src="https://via.placeholder.com/80" alt="Profile">
-            <div>Ria Rahman</div>
-        </div>
-
-        <!-- Story Bar -->
-        <div class="story-bar">
-            <div class="story">Ria</div>
-            <div class="story">Hasan</div>
-            <div class="story">Nabila</div>
-            <div class="story">Sabbir</div>
-            <div class="story">Tania</div>
-        </div>
-
-        <!-- Posts -->
-        <div class="post">
-            <div class="post-header">
-                <img src="https://via.placeholder.com/40" alt="Profile">
-                <div>Ria Rahman</div>
-            </div>
-            <div class="post-content">
-                আজকের দিনটা অনেক সুন্দর 💖
-            </div>
-            <div class="post-actions">
-                <span>❤️ Like</span>
-                <span>💬 Comment</span>
-                <span>🔁 Share</span>
-            </div>
-        </div>
-
-        <div class="post">
-            <div class="post-header">
-                <img src="https://via.placeholder.com/40" alt="Profile">
-                <div>Hasan Hosen</div>
-            </div>
-            <div class="post-content">
-                বন্ধুত্ব মানে শুধু হাসি নয়, বোঝাপড়া 💫
-            </div>
-            <div class="post-actions">
-                <span>❤️ Like</span>
-                <span>💬 Comment</span>
-                <span>🔁 Share</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Firebase Scripts -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
-<script src="Firebase.js"></script>
-<script>
-  // Check if user is logged in
-  auth.onAuthStateChanged(user => {
-    if(!user){
-      window.location.href = "Login.html"; // লগইন না করলে homepage দেখাবে না
-    }
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"></script>
+
+<script type="module">
+import { auth, db } from './firebase.js';
+import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+// USER CHECK
+auth.onAuthStateChanged(user => {
+  if (!user) window.location.href = "login.html";
+});
+
+// FEED LOAD
+async function loadFeed() {
+  const feed = document.getElementById("feed");
+  feed.innerHTML = "";
+
+  const snap = await getDocs(query(collection(db, "posts"), orderBy("createdAt", "desc")));
+
+  snap.forEach(doc => {
+    const p = doc.data();
+
+    feed.innerHTML += `
+      <div class='post'>
+        <h3>${p.userName}</h3>
+        <p>${p.caption}</p>
+
+        <button onclick="likePost('${doc.id}')">❤️ Like</button>
+        <button onclick="commentPost('${doc.id}')">💬 Comment</button>
+      </div>
+      <hr>
+    `;
   });
+}
+
+window.onload = loadFeed;
+
+// LIKE Function
+window.likePost = async (id) => {
+  alert("Like কাজ করছে! (ডাটাবেস দিলে আমি এড করে দিব)");
+};
+
+// COMMENT Function
+window.commentPost = (id) => {
+  alert("Comment কাজ করছে!");
+};
+
 </script>
+
+<style>
+.post{
+  background:#eee;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Bondhutto24</h2>
+<div id="feed"></div>
 
 </body>
 </html>
