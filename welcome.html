@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bondhutto24</title>
+    <style>
+        body {
+            background: #f0f2f5;
+            text-align: center;
+            font-family: Arial;
+        }
+
+        .logo img {
+            width: 110px;
+            margin-top: 50px;
+            border-radius: 25px;
+        }
+
+        .acc-box {
+            width: 90%;
+            margin: 15px auto;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+
+        .acc-box img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        .acc-name {
+            margin-left: 15px;
+            text-align: left;
+        }
+
+        .btn {
+            width: 80%;
+            margin-top: 30px;
+            padding: 12px;
+            border-radius: 30px;
+            border: 2px solid #1877f2;
+            background: white;
+            color: #1877f2;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="logo">
+    <img src="your-logo.png" alt="Bondhutto24">
+</div>
+
+<h3>Select your profile</h3>
+
+<div id="savedAccounts"></div>
+
+<button class="btn" onclick="window.location.href='signup.html'">
+    Create new account
+</button>
+
+<script>
+let accounts = JSON.parse(localStorage.getItem("savedAccounts")) || [];
+
+let box = "";
+
+accounts.forEach(acc => {
+    box += `
+        <div class="acc-box" onclick="autoLogin('${acc.email}')">
+            <img src="${acc.photo}">
+            <div class="acc-name">
+                <b>${acc.name}</b><br>
+                <small>${acc.email}</small>
+            </div>
+        </div>
+    `;
+});
+
+document.getElementById("savedAccounts").innerHTML = box;
+
+function autoLogin(email){
+    localStorage.setItem("autoLogin", email);
+    window.location.href = "home.html";
+}
+</script>
+
+</body>
+</html>
