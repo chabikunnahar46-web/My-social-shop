@@ -1,143 +1,120 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bondhutto24 Profile</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Profile • Bondhutto24</title>
+    <link rel="stylesheet" href="Style.css">
+
 <style>
-  body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; }
-  header.topbar { display:flex; align-items:center; justify-content:space-between; padding:10px 20px; background:#fff; border-bottom:1px solid #ddd; }
-  header .logo { font-size:26px; font-weight:bold; color:#2196F3; }
-  nav.menu { display:flex; gap:20px; }
-  nav.menu a { text-decoration:none; color:#333; font-size:16px; display:flex; align-items:center; gap:6px; transition:0.3s; }
-  nav.menu a:hover { color:#2196F3; }
-  nav.menu a img { width:24px; height:24px; }
+/* -------- PROFILE TOP -------- */
+.profile-header {
+    width: 100%;
+    background: #1877f2;
+    color: white;
+    padding-bottom: 50px;
+    text-align: center;
+    position: relative;
+}
 
-  .profile-container { max-width:1000px; margin:20px auto; background:#fff; padding:25px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
-  .profile-header { display:flex; align-items:center; gap:25px; margin-bottom:25px; }
-  .profile-header img { width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #2196F3; }
-  .profile-header div h2 { margin:0; font-size:28px; color:#333; }
-  .profile-header div p { margin:4px 0; color:#555; font-size:16px; }
+.cover-photo {
+    width: 100%;
+    height: 180px;
+    background: #145dbf;
+}
 
-  .settings, .upload-section, .earnings-section { margin-top:30px; }
-  .settings h3, .upload-section h3, .earnings-section h3 { margin-bottom:12px; border-bottom:1px solid #eee; padding-bottom:6px; color:#2196F3; }
-  .setting-item, .upload-item, .earning-item { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
-  .setting-item label, .upload-item label, .earning-item label { font-weight:bold; width:180px; }
-  .setting-item input, .setting-item select, .upload-item input, .upload-item select { padding:8px 12px; border:1px solid #ccc; border-radius:6px; flex:1; }
-  .apply-btn, .upload-btn { background:#9c27b0; color:white; padding:12px 22px; border:none; border-radius:8px; cursor:pointer; font-weight:bold; transition:0.3s; }
-  .apply-btn:hover, .upload-btn:hover { background:#7b1fa2; }
-  .upload-section textarea { width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; resize:none; }
-  .earnings-item span { font-weight:bold; color:#2196F3; }
+/* 🔶 Square Profile Pic (Facebook Style) */
+.profile-pic {
+    width: 130px;
+    height: 130px;
+    border-radius: 12px; /* আটকোনা */
+    border: 4px solid white;
+    position: absolute;
+    bottom: -65px;
+    left: 50%;
+    transform: translateX(-50%);
+    object-fit: cover;
+}
+
+/* Profile Info */
+.profile-info {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.profile-info h2 {
+    margin: 10px 0;
+}
+
+.profile-info p {
+    color: #555;
+}
+
+/* -------- POSTS -------- */
+.post {
+    background: #fff;
+    padding: 12px;
+    width: 92%;
+    margin: 12px auto;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.post img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* -------- BOTTOM MENU -------- */
+.bottom-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 999;
+}
+
+.bottom-menu a {
+    text-decoration: none;
+    color: #444;
+    font-size: 22px;
+}
 </style>
 </head>
+
 <body>
 
-<header class="topbar">
-  <div class="logo">Bondhutto24</div>
-  <nav class="menu">
-    <a href="index.html"><img src="icons/home.png" alt=""> Home</a>
-    <a href="reels.html"><img src="icons/video.png" alt=""> Reels</a>
-    <a href="friends.html"><img src="icons/friends.png" alt=""> Friends</a>
-    <a href="skills.html"><img src="icons/learning.png" alt=""> Learning</a>
-    <a href="profile.html"><img src="icons/profile.png" alt=""> Profile</a>
-  </nav>
-</header>
+<!-- 🔵 Profile Header -->
+<div class="profile-header">
+    <div class="cover-photo"></div>
 
-<div class="profile-container">
-  <!-- Profile Header -->
-  <div class="profile-header">
-    <img src="images/profile-pic.jpg" alt="Profile Picture">
-    <div>
-      <h2>Your Name</h2>
-      <p>Email: youremail@example.com</p>
-      <p>User Type: <strong>Student</strong></p>
-      <p>Status: <strong>Verified</strong></p>
-    </div>
-  </div>
+    <!-- Square Profile Photo -->
+    <img src="https://i.imgur.com/Qq6pZ4j.png" class="profile-pic" id="profilePic">
 
-  <!-- Account Settings -->
-  <div class="settings">
-    <h3>Account Settings</h3>
-    <div class="setting-item">
-      <label for="username">Username</label>
-      <input type="text" id="username" value="YourUsername">
+    <div class="profile-info">
+        <h2 id="profileName">User Name</h2>
+        <p>Your personal profile</p>
     </div>
-    <div class="setting-item">
-      <label for="email">Email</label>
-      <input type="email" id="email" value="youremail@example.com">
-    </div>
-    <div class="setting-item">
-      <label for="password">Password</label>
-      <input type="password" id="password" value="********">
-    </div>
-    <div class="setting-item">
-      <label for="language">Language</label>
-      <select id="language">
-        <option>English</option>
-        <option>Bangla</option>
-        <option>Hindi</option>
-      </select>
-    </div>
-    <div class="setting-item">
-      <label for="privacy">Privacy</label>
-      <select id="privacy">
-        <option>Public</option>
-        <option>Friends Only</option>
-        <option>Private</option>
-      </select>
-    </div>
-    <div class="setting-item">
-      <label for="usertype">User Type</label>
-      <select id="usertype">
-        <option>Student</option>
-        <option>Entrepreneur</option>
-        <option>Entertainment</option>
-      </select>
-    </div>
-
-    <div style="margin-top:20px;">
-      <button class="apply-btn">Apply</button>
-    </div>
-  </div>
-
-  <!-- Talent Upload Section -->
-  <div class="upload-section">
-    <h3>Upload Your Talent</h3>
-    <div class="upload-item">
-      <label for="title">Title</label>
-      <input type="text" id="title" placeholder="Enter title">
-    </div>
-    <div class="upload-item">
-      <label for="description">Description</label>
-      <textarea id="description" rows="3" placeholder="Describe your content..."></textarea>
-    </div>
-    <div class="upload-item">
-      <label for="file">Choose File</label>
-      <input type="file" id="file">
-    </div>
-    <div style="margin-top:15px;">
-      <button class="upload-btn">Upload & Earn</button>
-    </div>
-  </div>
-
-  <!-- Earnings Section -->
-  <div class="earnings-section">
-    <h3>Your Earnings</h3>
-    <div class="earning-item">
-      <label>Total Earnings:</label>
-      <span>$120.50</span>
-    </div>
-    <div class="earning-item">
-      <label>Pending Withdrawals:</label>
-      <span>$30.00</span>
-    </div>
-    <div class="earning-item">
-      <label>Completed Withdrawals:</label>
-      <span>$90.50</span>
-    </div>
-  </div>
 </div>
 
+<!-- 🔥 User Posts -->
+<div id="myPosts"></div>
+
+<!-- 🔵 Bottom Navigation -->
+<div class="bottom-menu">
+    <a href="index.html">🏠</a>
+    <a href="Upload.html">➕</a>
+    <a href="reels.html">🎬</a>
+    <a href="friends.html">👥</a>
+    <a href="profile.html">👤</a>
+</div>
+
+<script src="Firebase.js"></script>
+<script src="Profile.js"></script>
+
 </body>
-    </html>
+</html>
