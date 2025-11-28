@@ -1,120 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Profile • Bondhutto24</title>
-    <link rel="stylesheet" href="Style.css">
+<meta charset="UTF-8">
+<title>Friends • Bondhutto24</title>
+
+<link rel="stylesheet" href="Style.css">
 
 <style>
-/* -------- PROFILE TOP -------- */
-.profile-header {
-    width: 100%;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f0f2f5;
+}
+
+/* PAGE TOP */
+.header {
     background: #1877f2;
     color: white;
-    padding-bottom: 50px;
+    padding: 12px;
     text-align: center;
-    position: relative;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.cover-photo {
-    width: 100%;
-    height: 180px;
-    background: #145dbf;
-}
-
-/* 🔶 Square Profile Pic (Facebook Style) */
-.profile-pic {
-    width: 130px;
-    height: 130px;
-    border-radius: 12px; /* আটকোনা */
-    border: 4px solid white;
-    position: absolute;
-    bottom: -65px;
-    left: 50%;
-    transform: translateX(-50%);
-    object-fit: cover;
-}
-
-/* Profile Info */
-.profile-info {
-    margin-top: 80px;
-    text-align: center;
-}
-
-.profile-info h2 {
-    margin: 10px 0;
-}
-
-.profile-info p {
-    color: #555;
-}
-
-/* -------- POSTS -------- */
-.post {
+/* FRIEND LIST BOX */
+.friend-box {
     background: #fff;
     padding: 12px;
-    width: 92%;
-    margin: 12px auto;
+    margin: 10px;
     border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.15);
 }
 
-.post img {
-    width: 100%;
-    border-radius: 10px;
+/* Profile Picture (Square) */
+.friend-box img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
-/* -------- BOTTOM MENU -------- */
+.friend-info {
+    flex: 1;
+}
+
+.friend-name {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.add-btn {
+    background: #1877f2;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.msg-btn {
+    background: #e4e6eb;
+    color: #333;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* BOTTOM MENU */
 .bottom-menu {
     position: fixed;
     bottom: 0;
-    left: 0;
     width: 100%;
     background: #fff;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #ccc;
     display: flex;
     justify-content: space-around;
     padding: 10px 0;
-    z-index: 999;
 }
 
 .bottom-menu a {
-    text-decoration: none;
-    color: #444;
     font-size: 22px;
+    text-decoration: none;
+    color: #333;
 }
 </style>
-</head>
 
+</head>
 <body>
 
-<!-- 🔵 Profile Header -->
-<div class="profile-header">
-    <div class="cover-photo"></div>
+<div class="header">Friends</div>
 
-    <!-- Square Profile Photo -->
-    <img src="https://i.imgur.com/Qq6pZ4j.png" class="profile-pic" id="profilePic">
+<div id="friend-list"></div>
 
-    <div class="profile-info">
-        <h2 id="profileName">User Name</h2>
-        <p>Your personal profile</p>
-    </div>
-</div>
 
-<!-- 🔥 User Posts -->
-<div id="myPosts"></div>
-
-<!-- 🔵 Bottom Navigation -->
+<!-- BOTTOM MENU -->
 <div class="bottom-menu">
     <a href="index.html">🏠</a>
-    <a href="Upload.html">➕</a>
+    <a href="Upload.html">📤</a>
     <a href="reels.html">🎬</a>
     <a href="friends.html">👥</a>
     <a href="profile.html">👤</a>
 </div>
 
 <script src="Firebase.js"></script>
-<script src="Profile.js"></script>
+<script src="friends.js"></script>
 
 </body>
 </html>
