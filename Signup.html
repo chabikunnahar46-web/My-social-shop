@@ -1,39 +1,42 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
-<title>Create Account</title>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"></script>
-<script type="module" src="firebase.js"></script>
+    <title>Create Account</title>
+    <style>
+        body{ font-family: Arial; margin: 20px;}
+        input{ padding:10px; width: 90%; margin:5px; }
+        button{ padding:10px; width:95%; font-size:16px;}
+    </style>
 </head>
-
 <body>
+
 <h2>Create Account</h2>
 
-<input id="name" placeholder="Full Name"><br><br>
-<input id="email" placeholder="Email"><br><br>
-<input id="password" type="password" placeholder="Password"><br><br>
-<button id="signupBtn">Create Account</button>
+<input id="name" type="text" placeholder="Enter your name">
+<input id="email" type="email" placeholder="Enter your email">
+<input id="photo" type="text" placeholder="Profile Photo URL">
 
-<script type="module">
-import { auth, db } from './firebase.js';
-import { setDoc, doc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+<button onclick="createAcc()">Create Account</button>
 
-document.getElementById("signupBtn").onclick = async () => {
-  const name = name.value;
-  const email = email.value;
-  const pass = password.value;
+<script>
+function createAcc() {
+    let userName = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let userPhotoURL = document.getElementById("photo").value;
 
-  const user = await auth.createUserWithEmailAndPassword(email, pass);
+    // --- তোমার দেওয়া কোড এখানে ঠিক জায়গায় বসলো ---
+    let accounts = JSON.parse(localStorage.getItem("savedAccounts")) || [];
+    accounts.push({
+        name: userName,
+        email: email,
+        photo: userPhotoURL
+    });
+    localStorage.setItem("savedAccounts", JSON.stringify(accounts));
+    // ----------------------------------------------------
 
-  await setDoc(doc(db, "users", user.user.uid), {
-    name: name,
-    email: email
-  });
-
-  window.location.href = "login.html";
-};
+    // অ্যাকাউন্ট তৈরি হলে হোম পেজে পাঠাবে
+    window.location = "home.html";
+}
 </script>
 
 </body>
