@@ -1,28 +1,164 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Social Shop</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bondhutto24 - Home</title>
+<script type="module">
+  // ==============================
+  // Firebase Setup
+  // ==============================
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+  const firebaseConfig = {
+      apiKey: "AIzaSyA33of57qBOpIUioKDQ7dMx0KZR6OXLECY",
+      authDomain: "bondhotto-24.firebaseapp.com",
+      projectId: "bondhotto-24",
+      storageBucket: "bondhotto-24.appspot.com",
+      messagingSenderId: "585952718894",
+      appId: "1:585952718894:web:1d9b2e9f12f617a2f2afbf"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+  const storage = getStorage(app);
+
+  console.log("🔥 Firebase Connected");
+
+  // ==============================
+  // Auth Functions
+  // ==============================
+  window.signUp = async () => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("✅ Sign Up Successful");
+    } catch (err) { alert(err.message); }
+  }
+
+  window.logIn = async () => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("✅ Logged In Successfully");
+    } catch (err) { alert(err.message); }
+  }
+
+  window.logOut = async () => {
+    await signOut(auth);
+    alert("✅ Logged Out");
+  }
+
+  // ==============================
+  // Add Post Function
+  // ==============================
+  window.addPost = async () => {
+    const text = document.getElementById("postText").value;
+    const imageFile = document.getElementById("postImage").files[0];
+    if(!text && !imageFile) return alert("Post cannot be empty!");
+
+    let imageUrl = "";
+    if(imageFile){
+      const storageRef = ref(storage, 'posts/' + Date.now() + '_' + imageFile.name);
+      const uploadTask = uploadBytesResumable(storageRef, imageFile);
+      await new Promise((resolve, reject) => {
+        uploadTask.on('state_changed', null, error=>reject(error), ()=>resolve());
+      });
+      imageUrl = await getDownloadURL(storageRef);
+    }
+
+    const user = auth.currentUser;
+    if(!user) return alert("Please login to post!");
+
+    await addDoc(collection(db, "posts"), {
+      user: user.email,
+      text: text,
+      image: imageUrl,
+      timestamp: serverTimestamp()
+    });
+
+    document.getElementById("postText").value = "";
+    document.getElementById("postImage").value = "";
+  }
+
+  // ==============================
+  // Real-time Posts Listener
+  // ==============================
+  const postsDiv = document.getElementById("posts");
+  const postsQuery = query(collection(db, "posts"), orderBy("timestamp", "desc"));
+  onSnapshot(postsQuery, snapshot => {
+    postsDiv.innerHTML = "";
+    snapshot.forEach(doc => {
+      const post = doc.data();
+      const div = document.createElement("div");
+      div.classList.add("post-box");
+      div.innerHTML = `
+        <div class="post-user">${post.user}</div>
+        <div class="post-text">${post.text || ""}</div>
+        ${post.image ? `<img src="${post.image}" />` : ""}
+        <div class="post-actions">
+          <button onclick="alert('Liked!')">❤️ Like</button>
+          <button onclick="alert('Comment clicked!')">💬 Comment</button>
+          <button onclick="alert('Shared!')">🔁 Share</button>
+        </div>
+      `;
+      postsDiv.appendChild(div);
+    });
+  });
+
+  // ==============================
+  // Auth State Listener
+  // ==============================
+  onAuthStateChanged(auth, user => {
+    const authDiv = document.getElementById("authDiv");
+    if(user){
+      authDiv.innerHTML = `
+        Logged in as <b>${user.email}</b> 
+        <button onclick="logOut()">Log Out</button>
+      `;
+    } else {
+      authDiv.innerHTML = `
+        Email: <input id="email" placeholder="Email" /> 
+        Password: <input type="password" id="password" placeholder="Password" /> 
+        <button onclick="signUp()">Sign Up</button>
+        <button onclick="logIn()">Log In</button>
+      `;
+    }
+  });
+</script>
+<style>
+  body{font-family:Arial;background:#f0f2f5;margin:0;padding:0;}
+  header{background:#1877f2;color:white;padding:10px 20px;}
+  header h1{margin:0;}
+  .container{max-width:600px;margin:20px auto;}
+  .post-box{background:white;padding:15px;border-radius:8px;margin-bottom:15px;box-shadow:0 1px 3px rgba(0,0,0,0.1);}
+  .post-user{font-weight:bold;margin-bottom:5px;}
+  .post-text{margin-bottom:10px;}
+  .post-actions{display:flex;justify-content:space-between;font-size:14px;color:#65676b;}
+  .post-actions button{border:none;background:none;cursor:pointer;color:#65676b;}
+  #authDiv input{padding:5px;margin:3px;}
+  #authDiv button{padding:5px;margin:3px;background:#1877f2;color:white;border:none;border-radius:3px;cursor:pointer;}
+</style>
 </head>
 <body>
+<header>
+  <h1>Bondhutto24</h1>
+  <div id="authDiv"></div>
+</header>
 
-<h2>Sign Up</h2>
-<input id="signupEmail" placeholder="Email">
-<input id="signupPassword" type="password" placeholder="Password">
-<button onclick="signup(document.getElementById('signupEmail').value, document.getElementById('signupPassword').value)">Sign Up</button>
-
-<h2>Login</h2>
-<input id="loginEmail" placeholder="Email">
-<input id="loginPassword" type="password" placeholder="Password">
-<button onclick="login(document.getElementById('loginEmail').value, document.getElementById('loginPassword').value)">Login</button>
-
-<h2>Create Post</h2>
-<input id="postMessage" placeholder="Write something...">
-<button onclick="savePost(document.getElementById('postMessage').value)">Post</button>
-
-<h2>All Posts (Check Console)</h2>
-<button onclick="fetchPosts()">Fetch Posts</button>
-
-<script type="module" src="main.js"></script>
+<div class="container">
+  <div class="new-post">
+    <textarea id="postText" placeholder="আপনার মুড বা ভাব শেয়ার করুন..."></textarea><br>
+    <input type="file" id="postImage" accept="image/*"><br>
+    <button onclick="addPost()">📤 শেয়ার করুন</button>
+  </div>
+  <div id="posts"></div>
+</div>
 </body>
 </html>
