@@ -1,73 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Bondhutto24</title>
-
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"></script>
-
-<script type="module">
-import { auth, db } from './firebase.js';
-import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-
-// USER CHECK
-auth.onAuthStateChanged(user => {
-  if (!user) window.location.href = "login.html";
-});
-
-// FEED LOAD
-async function loadFeed() {
-  const feed = document.getElementById("feed");
-  feed.innerHTML = "";
-
-  const snap = await getDocs(query(collection(db, "posts"), orderBy("createdAt", "desc")));
-
-  snap.forEach(doc => {
-    const p = doc.data();
-
-    feed.innerHTML += `
-      <div class='post'>
-        <h3>${p.userName}</h3>
-        <p>${p.caption}</p>
-
-        <button onclick="likePost('${doc.id}')">❤️ Like</button>
-        <button onclick="commentPost('${doc.id}')">💬 Comment</button>
-      </div>
-      <hr>
-    `;
-  });
-}
-
-window.onload = loadFeed;
-
-// LIKE Function
-window.likePost = async (id) => {
-  alert("Like কাজ করছে! (ডাটাবেস দিলে আমি এড করে দিব)");
-};
-
-// COMMENT Function
-window.commentPost = (id) => {
-  alert("Comment কাজ করছে!");
-};
-
-</script>
-
-<style>
-.post{
-  background:#eee;
-  padding:10px;
-  border-radius:10px;
-  margin-bottom:10px;
-}
-</style>
-
+    <title>Bondhutto24</title>
+    <style>
+        body{
+            font-family: Arial;
+            text-align:center;
+            margin-top: 100px;
+        }
+        .box{
+            padding:20px;
+        }
+        button{
+            padding:10px 20px;
+            font-size:18px;
+        }
+    </style>
 </head>
-
 <body>
 
-<h2>Bondhutto24</h2>
-<div id="feed"></div>
+    <h1>Bondhutto24</h1>
+    <p>Connect with friends and the world around you.</p>
+
+    <button onclick="window.location='signup.html'">
+        Create Account
+    </button>
 
 </body>
 </html>
