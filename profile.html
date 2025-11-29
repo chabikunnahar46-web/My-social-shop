@@ -1,210 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bondhutto24 Profile</title>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-  import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
-
-  const firebaseConfig = {
-      apiKey: "AIzaSyA33of57qBOpIUioKDQ7dMx0KZR6OXLECY",
-      authDomain: "bondhotto-24.firebaseapp.com",
-      projectId: "bondhotto-24",
-      storageBucket: "bondhotto-24.appspot.com",
-      messagingSenderId: "585952718894",
-      appId: "1:585952718894:web:1d9b2e9f12f617a2f2afbf"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const auth = getAuth(app);
-  const storage = getStorage(app);
-
-  // ==============================
-  // Auth Functions
-  // ==============================
-  window.signUp = async () => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert("✅ Sign Up Successful");
-    } catch (err) { alert(err.message); }
-  }
-
-  window.logIn = async () => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert("✅ Logged In Successfully");
-    } catch (err) { alert(err.message); }
-  }
-
-  window.logOut = async () => {
-    await signOut(auth);
-    alert("✅ Logged Out");
-  }
-
-  // ==============================
-  // Upload Cover / Profile Photo
-  // ==============================
-  window.uploadProfilePhoto = async () => {
-    const file = document.getElementById("profilePhoto").files[0];
-    if(!file) return alert("Select a photo first!");
-    const user = auth.currentUser;
-    if(!user) return alert("Login first!");
-
-    const storageRef = ref(storage, 'profile_photos/' + user.uid + '_' + Date.now() + '_' + file.name);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    await new Promise((resolve,reject)=>uploadTask.on('state_changed', null, e=>reject(e), ()=>resolve()));
-    const url = await getDownloadURL(storageRef);
-
-    await addDoc(collection(db, "profile_photos"), { uid: user.uid, type:"profile", url, timestamp: serverTimestamp() });
-    document.getElementById("profilePhoto").value = "";
-  }
-
-  window.uploadCoverPhoto = async () => {
-    const file = document.getElementById("coverPhoto").files[0];
-    if(!file) return alert("Select a photo first!");
-    const user = auth.currentUser;
-    if(!user) return alert("Login first!");
-
-    const storageRef = ref(storage, 'cover_photos/' + user.uid + '_' + Date.now() + '_' + file.name);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    await new Promise((resolve,reject)=>uploadTask.on('state_changed', null, e=>reject(e), ()=>resolve()));
-    const url = await getDownloadURL(storageRef);
-
-    await addDoc(collection(db, "profile_photos"), { uid: user.uid, type:"cover", url, timestamp: serverTimestamp() });
-    document.getElementById("coverPhoto").value = "";
-  }
-
-  // ==============================
-  // Add Post Function
-  // ==============================
-  window.addPost = async () => {
-    const text = document.getElementById("postText").value;
-    const imageFile = document.getElementById("postImage").files[0];
-    if(!text && !imageFile) return alert("Post cannot be empty!");
-
-    let imageUrl = "";
-    if(imageFile){
-      const storageRef = ref(storage, 'posts/' + Date.now() + '_' + imageFile.name);
-      const uploadTask = uploadBytesResumable(storageRef, imageFile);
-      await new Promise((resolve,reject)=>uploadTask.on('state_changed', null, e=>reject(e), ()=>resolve()));
-      imageUrl = await getDownloadURL(storageRef);
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bondhutto24</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
     }
 
-    const user = auth.currentUser;
-    if(!user) return alert("Login first!");
-
-    await addDoc(collection(db, "posts"), { user: user.email, text, image: imageUrl, timestamp: serverTimestamp() });
-    document.getElementById("postText").value = "";
-    document.getElementById("postImage").value = "";
-  }
-
-  // ==============================
-  // Real-time Posts Listener
-  // ==============================
-  const postsDiv = document.getElementById("posts");
-  function loadUserPosts(userEmail){
-    const postsQuery = query(collection(db, "posts"), orderBy("timestamp","desc"));
-    onSnapshot(postsQuery, snapshot=>{
-      postsDiv.innerHTML="";
-      snapshot.forEach(doc=>{
-        const post=doc.data();
-        if(post.user===userEmail){
-          const div=document.createElement("div");
-          div.classList.add("post-box");
-          div.innerHTML=`
-            <div class="post-user">${post.user}</div>
-            <div class="post-text">${post.text||""}</div>
-            ${post.image?`<img src="${post.image}" />`:""}
-            <div class="post-actions">
-              <button onclick="alert('Liked!')">❤️ Like</button>
-              <button onclick="alert('Comment clicked!')">💬 Comment</button>
-              <button onclick="alert('Shared!')">🔁 Share</button>
-            </div>
-          `;
-          postsDiv.appendChild(div);
-        }
-      });
-    });
-  }
-
-  // ==============================
-  // Auth State Listener
-  // ==============================
-  onAuthStateChanged(auth,user=>{
-    const authDiv=document.getElementById("authDiv");
-    const profileName=document.getElementById("profileName");
-    if(user){
-      authDiv.innerHTML=`<button onclick="logOut()">Log Out</button>`;
-      profileName.innerText=user.email;
-      loadUserPosts(user.email);
-    } else {
-      authDiv.innerHTML=`
-        Email: <input id="email" placeholder="Email" />
-        Password: <input type="password" id="password" placeholder="Password" />
-        <button onclick="signUp()">Sign Up</button>
-        <button onclick="logIn()">Log In</button>
-      `;
-      profileName.innerText="Guest";
+    /* Top Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: #ffffff;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
-  });
+    .top-nav a {
+      text-decoration: none;
+      color: #333;
+      font-size: 15px;
+      font-weight: 600;
+    }
 
-</script>
+    /* Bottom Navigation Like YouTube */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #ffffff;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 999;
+    }
+    .bottom-nav .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 12px;
+      color: #333;
+    }
 
-<style>
-body{margin:0;font-family:Arial;background:#f0f2f5;}
-header{background:#1877f2;color:white;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;}
-header h1{margin:0;}
-.container{max-width:600px;margin:20px auto;}
-.profile-header{background:white;padding:10px;border-radius:8px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);text-align:center;position:relative;}
-.cover-photo{width:100%;height:150px;background:#ccc;border-radius:8px 8px 0 0;object-fit:cover;}
-.profile-photo{width:100px;height:100px;border-radius:50%;border:3px solid white;position:absolute;bottom:-50px;left:calc(50% - 50px);object-fit:cover;}
-.profile-name{margin-top:60px;font-weight:bold;}
-.post-box{background:white;padding:15px;border-radius:8px;margin-bottom:15px;box-shadow:0 1px 3px rgba(0,0,0,0.1);}
-.post-user{font-weight:bold;margin-bottom:5px;}
-.post-text{margin-bottom:10px;}
-.post-actions{display:flex;justify-content:space-between;font-size:14px;color:#65676b;}
-.post-actions button{border:none;background:none;cursor:pointer;color:#65676b;}
-#authDiv input{padding:5px;margin:3px;}
-#authDiv button{padding:5px;margin:3px;background:#1877f2;color:white;border:none;border-radius:3px;cursor:pointer;}
-</style>
+    /* Icons placeholder */
+    .icon {
+      width: 25px;
+      height: 25px;
+      background: #ccc;
+      border-radius: 5px;
+      margin-bottom: 4px;
+    }
+
+    /* Page Content */
+    .content {
+      padding: 20px;
+      margin-bottom: 80px; /* space for bottom nav */
+    }
+  </style>
 </head>
-
 <body>
-<header>
-  <h1>Bondhutto24 Profile</h1>
-  <div id="authDiv"></div>
-</header>
 
-<div class="container">
-  <div class="profile-header">
-    <img id="coverImg" class="cover-photo" src="https://via.placeholder.com/600x150" />
-    <img id="profileImg" class="profile-photo" src="https://via.placeholder.com/100" />
-    <h2 id="profileName" class="profile-name">Guest</h2>
-    <div style="margin-top:10px;">
-      <input type="file" id="coverPhoto" accept="image/*">
-      <button onclick="uploadCoverPhoto()">Upload Cover</button>
-      <input type="file" id="profilePhoto" accept="image/*">
-      <button onclick="uploadProfilePhoto()">Upload Profile</button>
+  <!-- Top Navigation -->
+  <div class="top-nav">
+    <a href="#">Bondhutto24</a>
+    <a href="#">Home</a>
+    <a href="#">Reels</a>
+    <a href="#">Friends</a>
+    <a href="#">Notification</a>
+    <a href="#">Learning</a>
+  </div>
+
+  <!-- Page Content -->
+  <div class="content">
+    <h2>Welcome to Bondhutto24</h2>
+    <p>Your social hub.</p>
+  </div>
+
+  <!-- Bottom Navigation (YouTube Style) -->
+  <div class="bottom-nav">
+    <div class="item">
+      <div class="icon"></div>
+      <span>Home</span>
+    </div>
+
+    <div class="item">
+      <div class="icon"></div>
+      <span>Gift</span>
+    </div>
+
+    <div class="item">
+      <div class="icon"></div>
+      <span>Profile</span>
     </div>
   </div>
 
-  <div class="new-post">
-    <textarea id="postText" placeholder="আপনার মুড বা ভাব শেয়ার করুন..."></textarea><br>
-    <input type="file" id="postImage" accept="image/*"><br>
-    <button onclick="addPost()">📤 শেয়ার করুন</button>
-  </div>
-
-  <div id="posts"></div>
-</div>
 </body>
 </html>
