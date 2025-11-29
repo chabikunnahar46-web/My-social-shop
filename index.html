@@ -1,102 +1,131 @@
-<DOCTYPE html>
-<html lang="bn">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bondhutto24 - Home</title>
-  <link rel="stylesheet" href="style.css" />
-</head>!
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Network</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+    }
+
+    /* Top Navbar */
+    .navbar {
+      background: #1877f2;
+      padding: 10px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .navbar .title {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    /* Post Box */
+    .post-box {
+      background: #fff;
+      margin: 15px;
+      padding: 12px;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .post-box input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    /* Posts */
+    .post {
+      background: #fff;
+      margin: 15px;
+      padding: 12px;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #bbb;
+      margin-right: 10px;
+    }
+
+    .post img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 12px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .actions div {
+      padding: 6px;
+      border-radius: 6px;
+      background: #f0f2f5;
+    }
+  </style>
+</head>
 <body>
-  <header class="topbar">
-    <div class="brand">Bondhutto24</div>
-<div class="logo">Bondhutto24</div>
-  <divu class="menu">
-    <a href="index.html"><img src="icons/home.png" alt=""> Home</a>
-    <a href="reels.html"><img src="icons/video.png" alt=""> Reels</a>
-    <a href="friends.html"><img src="icons/friends.png" alt=""> Friends</a>
-    <a href="skills.html"><img src="icons/learning.png" alt=""> Learning</a>
-    <a href="profile.html"><img src="
-  </nav>
-    <div id="authArea" class="auth-area"></div>
-  </header>
 
-  <main class="app">
-    <section id="home" class="page-section" style="display:block;">
-      <div class="container">
+  <div class="navbar">
+    <div class="title">MySocial</div>
+  </div>
 
-        <!-- Stories row -->
-        <div class="stories card">
-          <div class="story add-story">+ Create Story</div>
-          <div class="story">Story 1</div>
-          <div class="story">Story 2</div>
-          <div class="story">Story 3</div>
-          <div class="story">Story 4</div>
-        </div>
+  <div class="post-box">
+    <input type="text" placeholder="What's on your mind?" />
+  </div>
 
-        <!-- Post creator -->
-        <div class="post-creator card">
-          <img class="avatar" src="https://via.placeholder.com/42" />
-          <div class="creator-body">
-            <textarea id="postText" placeholder="আপনার মুড বা ভাব শেয়ার করুন..." rows="2"></textarea>
-            <div class="creator-row">
-              <input id="postFile" type="file" accept="image/*" />
-              <div class="creator-actions">
-                <button class="small-btn" id="postBtn">📤 শেয়ার করুন</button>
-              </div>
-            </div>
-            <div class="creator-options">
-              <button class="opt">😊 Feeling</button>
-              <button class="opt">🎥 Live</button>
-              <button class="opt">📍 Location</button>
-            </div>
-          </div>
-        </div>
+  <div class="post">
+    <div class="post-header">
+      <div class="profile-pic"></div>
+      <b>Riya Rahman</b>
+    </div>
+    <p>আজকের দিনটা অনেক সুন্দর 💖</p>
+    <img src="https://via.placeholder.com/400x250" />
+    <div class="actions">
+      <div>❤️ Like</div>
+      <div>💬 Comment</div>
+      <div>🔁 Share</div>
+    </div>
+  </div>
 
-        <!-- Feed -->
-        <div id="feed"></div>
-      </div>
-    </section>
+  <div class="post">
+    <div class="post-header">
+      <div class="profile-pic"></div>
+      <b>Hasan Hossain</b>
+    </div>
+    <p>বন্ধুত্ব মানে শুধু হাসি নয়, বোঝাপড়া 💫</p>
+    <img src="https://via.placeholder.com/400x250" />
+    <div class="actions">
+      <div>❤️ Like</div>
+      <div>💬 Comment</div>
+      <div>🔁 Share</div>
+    </div>
+  </div>
 
-    <!-- Reels placeholder -->
-    <section id="reels" class="page-section" style="display:none;">
-      <div class="container">
-        <h2>Reels</h2>
-        <p>Short video placeholders — পরে ভিডিও আপলোড ফিচার যোগ করা যাবে।</p>
-      </div>
-    </section>
-
-    <!-- Friends placeholder -->
-    <section id="friends" class="page-section" style="display:none;">
-      <div class="container">
-        <h2>Friends</h2>
-        <div id="friendsList"></div>
-      </div>
-    </section>
-
-    <!-- Notification placeholder -->
-    <section id="notification" class="page-section" style="display:none;">
-      <div class="container">
-        <h2>Notification</h2>
-        <div id="notifications"></div>
-      </div>
-    </section>
-
-    <!-- Learning placeholder -->
-    <section id="learning" class="page-section" style="display:none;">
-      <div class="container">
-        <h2>Learning</h2>
-        <p>Courses, tutorials and learning partners.</p>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="bottom-nav">
-    <button data-section="home">Home</button>
-    <button data-section="gift">Gift</button>
-    <button data-section="profile">Profile</button>
-  </footer>
-
-  <script type="module" src="app.js"></script>
 </body>
 </html>
