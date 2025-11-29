@@ -1,67 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bondhutto24 - Home</title>
-<script type="module">
-  // ==============================
-  // Firebase Setup
-  // ==============================
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-  import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+    <meta charset="UTF-8">
+    <title>Bondhutto24</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background: #f0f2f5;
+        }
 
-  const firebaseConfig = {
-      apiKey: "AIzaSyA33of57qBOpIUioKDQ7dMx0KZR6OXLECY",
-      authDomain: "bondhotto-24.firebaseapp.com",
-      projectId: "bondhotto-24",
-      storageBucket: "bondhotto-24.appspot.com",
-      messagingSenderId: "585952718894",
-      appId: "1:585952718894:web:1d9b2e9f12f617a2f2afbf"
-  };
+        /* TOP NAV */
+        .top-nav {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            padding: 10px;
+            box-shadow: 0 2px 5px #0002;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const auth = getAuth(app);
-  const storage = getStorage(app);
+        .top-nav button {
+            background: none;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+        }
 
-  console.log("🔥 Firebase Connected");
+        /* PAGE SECTIONS */
+        .page-section {
+            display: none;
+            padding: 80px 20px 70px;
+        }
 
-  // ==============================
-  // Auth Functions
-  // ==============================
-  window.signUp = async () => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert("✅ Sign Up Successful");
-    } catch (err) { alert(err.message); }
-  }
+        /* BOTTOM NAV */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px;
+            box-shadow: 0 -2px 5px #0002;
+        }
 
-  window.logIn = async () => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert("✅ Logged In Successfully");
-    } catch (err) { alert(err.message); }
-  }
+        .bottom-nav button {
+            background: none;
+            border: none;
+            font-size: 16px;
+        }
+    </style>
+</head>
 
-  window.logOut = async () => {
-    await signOut(auth);
-    alert("✅ Logged Out");
-  }
+<body>
 
-  // ==============================
-  // Add Post Function
-  // ==============================
-  window.addPost = async () => {
-    const text = document.getElementById("postText").value;
-    const imageFile = document.getElementById("postImage").files[0];
-    if(!text && !imageFile) return alert("Post cannot be empty!");
+    <!-- TOP NAV -->
+    <div class="top-nav">
+        <button onclick="showSection('home')">Home</button>
+        <button onclick="showSection('reels')">Reels</button>
+        <button onclick="showSection('friends')">Friends</button>
+        <button onclick="showSection('notification')">Notification</button>
+        <button onclick="showSection('learning')">Learning</button>
+    </div>
 
-    let imageUrl = "";
-    if(imageFile){
+    <!-- ALL SECTIONS -->
+    <div id="home" class="page-section">
+        <h2>Home Feed</h2>
+        <p>Welcome to Bondhutto24 Home!</p>
+    </div>
+
+    <div id="reels" class="page-section">
+        <h2>Reels</h2>
+        <p>Reels videos will show here.</p>
+    </div>
+
+    <div id="friends" class="page-section">
+        <h2>Friends</h2>
+        <p>Your friends list.</p>
+    </div>
+
+    <div id="notification" class="page-section">
+        <h2>Notification</h2>
+        <p>Recent notifications.</p>
+    </div>
+
+    <div id="learning" class="page-section">
+        <h2>Learning</h2>
+        <p>Educational content.</p>
+    </div>
+
+    <div id="gift" class="page-section">
+        <h2>Gift</h2>
+        <p>Gifts and rewards.</p>
+    </div>
+
+    <div id="profile" class="page-section">
+        <h2>Your Profile</h2>
+        <p>Profile details will show here.</p>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+        <button onclick="showSection('home')">Home</button>
+        <button onclick="showSection('gift')">Gift</button>
+        <button onclick="showSection('profile')">Profile</button>
+    </div>
+
+    <script>
+        function showSection(id) {
+            document.querySelectorAll(".page-section").forEach(sec => {
+                sec.style.display = "none";
+            });
+            document.getElementById(id).style.display = "block";
+        }
+
+        // Default page
+        showSection("home");
+    </script>
+
+</body>
+</html>
