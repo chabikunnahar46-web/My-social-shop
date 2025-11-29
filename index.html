@@ -1,126 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <title>Bondhutto24</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: sans-serif;
-            background: #f0f2f5;
-        }
-
-        /* TOP NAV */
-        .top-nav {
-            display: flex;
-            justify-content: space-around;
-            background: white;
-            padding: 10px;
-            box-shadow: 0 2px 5px #0002;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 10;
-        }
-
-        .top-nav button {
-            background: none;
-            border: none;
-            padding: 10px;
-            font-size: 16px;
-        }
-
-        /* PAGE SECTIONS */
-        .page-section {
-            display: none;
-            padding: 80px 20px 70px;
-        }
-
-        /* BOTTOM NAV */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 12px;
-            box-shadow: 0 -2px 5px #0002;
-        }
-
-        .bottom-nav button {
-            background: none;
-            border: none;
-            font-size: 16px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bondhutto24</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-
-    <!-- TOP NAV -->
-    <div class="top-nav">
-        <button onclick="showSection('home')">Home</button>
-        <button onclick="showSection('reels')">Reels</button>
-        <button onclick="showSection('friends')">Friends</button>
-        <button onclick="showSection('notification')">Notification</button>
-        <button onclick="showSection('learning')">Learning</button>
+  <!-- top header -->
+  <header class="topbar">
+    <div class="brand">Bondhutto24</div>
+    <nav class="top-tabs">
+      <button data-section="home" class="tab-btn active">Home</button>
+      <button data-section="reels" class="tab-btn">Reels</button>
+      <button data-section="friends" class="tab-btn">Friends</button>
+      <button data-section="notification" class="tab-btn">Notification</button>
+      <button data-section="learning" class="tab-btn">Learning</button>
+    </nav>
+    <div id="authArea" class="auth-area">
+      <!-- Login/Signup or user info appears here (filled by app.js) -->
     </div>
+  </header>
 
-    <!-- ALL SECTIONS -->
-    <div id="home" class="page-section">
-        <h2>Home Feed</h2>
-        <p>Welcome to Bondhutto24 Home!</p>
-    </div>
+  <main class="app">
+    <!-- Profile header -->
+    <section id="profileSection" class="page-section" style="display:block;">
+      <div class="profile-card">
+        <img id="coverImg" class="cover" src="https://via.placeholder.com/900x160" alt="cover"/>
+        <div class="profile-row">
+          <img id="profileImg" class="avatar-lg" src="https://via.placeholder.com/110" alt="profile"/>
+          <div class="profile-info">
+            <h2 id="profileName">Guest</h2>
+            <div class="profile-actions">
+              <input id="coverFile" type="file" accept="image/*" />
+              <button class="small-btn" id="uploadCoverBtn">Upload Cover</button>
+              <input id="profileFile" type="file" accept="image/*" />
+              <button class="small-btn" id="uploadProfileBtn">Upload Profile</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div id="reels" class="page-section">
+    <!-- Home Feed -->
+    <section id="home" class="page-section">
+      <div class="container">
+        <div class="post-creator card">
+          <img class="avatar" src="https://via.placeholder.com/42" />
+          <div class="creator-body">
+            <textarea id="postText" placeholder="আপনার মুড বা ভাব শেয়ার করুন..." rows="2"></textarea>
+            <div class="creator-row">
+              <input id="postFile" type="file" accept="image/*" />
+              <button class="small-btn" id="postBtn">📤 শেয়ার করুন</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="feed"></div>
+      </div>
+    </section>
+
+    <!-- Reels -->
+    <section id="reels" class="page-section" style="display:none;">
+      <div class="container">
         <h2>Reels</h2>
-        <p>Reels videos will show here.</p>
-    </div>
+        <p>Short videos (placeholder). আপনি ভিডিও আপলোড ফিচার পরে যুক্ত করতেই পারবেন।</p>
+      </div>
+    </section>
 
-    <div id="friends" class="page-section">
+    <!-- Friends -->
+    <section id="friends" class="page-section" style="display:none;">
+      <div class="container">
         <h2>Friends</h2>
-        <p>Your friends list.</p>
-    </div>
+        <div id="friendsList">Loading friends...</div>
+      </div>
+    </section>
 
-    <div id="notification" class="page-section">
-        <h2>Notification</h2>
-        <p>Recent notifications.</p>
-    </div>
+    <!-- Notification -->
+    <section id="notification" class="page-section" style="display:none;">
+      <div class="container">
+        <h2>Notifications</h2>
+        <div id="notifications">No notifications yet</div>
+      </div>
+    </section>
 
-    <div id="learning" class="page-section">
+    <!-- Learning -->
+    <section id="learning" class="page-section" style="display:none;">
+      <div class="container">
         <h2>Learning</h2>
-        <p>Educational content.</p>
-    </div>
+        <p>Educational content / courses placeholder.</p>
+      </div>
+    </section>
 
-    <div id="gift" class="page-section">
-        <h2>Gift</h2>
-        <p>Gifts and rewards.</p>
-    </div>
+    <!-- Gift (bottom nav) -->
+    <section id="gift" class="page-section" style="display:none;">
+      <div class="container">
+        <h2>Gift Center</h2>
+        <p>Send gifts, rewards — placeholder section.</p>
+      </div>
+    </section>
 
-    <div id="profile" class="page-section">
+    <!-- Profile (Bottom nav) -->
+    <section id="profile" class="page-section" style="display:none;">
+      <div class="container">
         <h2>Your Profile</h2>
-        <p>Profile details will show here.</p>
-    </div>
+        <div id="profilePosts"></div>
+      </div>
+    </section>
+  </main>
 
-    <!-- BOTTOM NAV -->
-    <div class="bottom-nav">
-        <button onclick="showSection('home')">Home</button>
-        <button onclick="showSection('gift')">Gift</button>
-        <button onclick="showSection('profile')">Profile</button>
-    </div>
+  <!-- bottom nav -->
+  <footer class="bottom-nav">
+    <button data-section="home">Home</button>
+    <button data-section="gift">Gift</button>
+    <button data-section="profile">Profile</button>
+  </footer>
 
-    <script>
-        function showSection(id) {
-            document.querySelectorAll(".page-section").forEach(sec => {
-                sec.style.display = "none";
-            });
-            document.getElementById(id).style.display = "block";
-        }
-
-        // Default page
-        showSection("home");
-    </script>
-
+  <!-- main app script (module) -->
+  <script type="module" src="app.js"></script>
 </body>
 </html>
