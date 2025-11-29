@@ -1,13 +1,12 @@
-<!DOCTYPE html>
+<DOCTYPE html>
 <html lang="bn">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bondhutto24</title>
+  <title>Bondhutto24 - Home</title>
   <link rel="stylesheet" href="style.css" />
-</head>
+</head>!
 <body>
-  <!-- top header -->
   <header class="topbar">
     <div class="brand">Bondhutto24</div>
     <nav class="top-tabs">
@@ -17,106 +16,86 @@
       <button data-section="notification" class="tab-btn">Notification</button>
       <button data-section="learning" class="tab-btn">Learning</button>
     </nav>
-    <div id="authArea" class="auth-area">
-      <!-- Login/Signup or user info appears here (filled by app.js) -->
-    </div>
+    <div id="authArea" class="auth-area"></div>
   </header>
 
   <main class="app">
-    <!-- Profile header -->
-    <section id="profileSection" class="page-section" style="display:block;">
-      <div class="profile-card">
-        <img id="coverImg" class="cover" src="https://via.placeholder.com/900x160" alt="cover"/>
-        <div class="profile-row">
-          <img id="profileImg" class="avatar-lg" src="https://via.placeholder.com/110" alt="profile"/>
-          <div class="profile-info">
-            <h2 id="profileName">Guest</h2>
-            <div class="profile-actions">
-              <input id="coverFile" type="file" accept="image/*" />
-              <button class="small-btn" id="uploadCoverBtn">Upload Cover</button>
-              <input id="profileFile" type="file" accept="image/*" />
-              <button class="small-btn" id="uploadProfileBtn">Upload Profile</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Home Feed -->
-    <section id="home" class="page-section">
+    <section id="home" class="page-section" style="display:block;">
       <div class="container">
+
+        <!-- Stories row -->
+        <div class="stories card">
+          <div class="story add-story">+ Create Story</div>
+          <div class="story">Story 1</div>
+          <div class="story">Story 2</div>
+          <div class="story">Story 3</div>
+          <div class="story">Story 4</div>
+        </div>
+
+        <!-- Post creator -->
         <div class="post-creator card">
           <img class="avatar" src="https://via.placeholder.com/42" />
           <div class="creator-body">
             <textarea id="postText" placeholder="আপনার মুড বা ভাব শেয়ার করুন..." rows="2"></textarea>
             <div class="creator-row">
               <input id="postFile" type="file" accept="image/*" />
-              <button class="small-btn" id="postBtn">📤 শেয়ার করুন</button>
+              <div class="creator-actions">
+                <button class="small-btn" id="postBtn">📤 শেয়ার করুন</button>
+              </div>
+            </div>
+            <div class="creator-options">
+              <button class="opt">😊 Feeling</button>
+              <button class="opt">🎥 Live</button>
+              <button class="opt">📍 Location</button>
             </div>
           </div>
         </div>
 
+        <!-- Feed -->
         <div id="feed"></div>
       </div>
     </section>
 
-    <!-- Reels -->
+    <!-- Reels placeholder -->
     <section id="reels" class="page-section" style="display:none;">
       <div class="container">
         <h2>Reels</h2>
-        <p>Short videos (placeholder). আপনি ভিডিও আপলোড ফিচার পরে যুক্ত করতেই পারবেন।</p>
+        <p>Short video placeholders — পরে ভিডিও আপলোড ফিচার যোগ করা যাবে।</p>
       </div>
     </section>
 
-    <!-- Friends -->
+    <!-- Friends placeholder -->
     <section id="friends" class="page-section" style="display:none;">
       <div class="container">
         <h2>Friends</h2>
-        <div id="friendsList">Loading friends...</div>
+        <div id="friendsList"></div>
       </div>
     </section>
 
-    <!-- Notification -->
+    <!-- Notification placeholder -->
     <section id="notification" class="page-section" style="display:none;">
       <div class="container">
-        <h2>Notifications</h2>
-        <div id="notifications">No notifications yet</div>
+        <h2>Notification</h2>
+        <div id="notifications"></div>
       </div>
     </section>
 
-    <!-- Learning -->
+    <!-- Learning placeholder -->
     <section id="learning" class="page-section" style="display:none;">
       <div class="container">
         <h2>Learning</h2>
-        <p>Educational content / courses placeholder.</p>
+        <p>Courses, tutorials and learning partners.</p>
       </div>
     </section>
 
-    <!-- Gift (bottom nav) -->
-    <section id="gift" class="page-section" style="display:none;">
-      <div class="container">
-        <h2>Gift Center</h2>
-        <p>Send gifts, rewards — placeholder section.</p>
-      </div>
-    </section>
-
-    <!-- Profile (Bottom nav) -->
-    <section id="profile" class="page-section" style="display:none;">
-      <div class="container">
-        <h2>Your Profile</h2>
-        <div id="profilePosts"></div>
-      </div>
-    </section>
   </main>
 
-  <!-- bottom nav -->
   <footer class="bottom-nav">
     <button data-section="home">Home</button>
     <button data-section="gift">Gift</button>
     <button data-section="profile">Profile</button>
   </footer>
 
-  <!-- main app script (module) -->
   <script type="module" src="app.js"></script>
 </body>
 </html>
