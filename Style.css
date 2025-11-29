@@ -1,4 +1,4 @@
-/* basic reset */
+style.css - Bondhutto24 Home */
 *{box-sizing:border-box}
 body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:#f2f4f7;color:#222}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#fff;border-bottom:1px solid #e6e6e6;position:sticky;top:0;z-index:50}
@@ -8,39 +8,36 @@ body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:#f2f4f7;co
 .tab-btn.active{background:#eef6ff;color:#1877f2}
 .auth-area{display:flex;gap:8px;align-items:center}
 
-/* layout */
 .app{padding:12px 0 80px}
 .container{max-width:900px;margin:10px auto;padding:0 12px}
 
-/* profile header */
-.profile-card{background:#fff;border-radius:10px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 4px rgba(16,24,40,0.06)}
-.cover{width:100%;height:160px;object-fit:cover;background:#ddd;display:block}
-.profile-row{display:flex;align-items:center;gap:14px;padding:12px}
-.avatar-lg{width:110px;height:110px;border-radius:50%;object-fit:cover;border:4px solid #fff;margin-top:-60px;background:#fff}
-.profile-info{flex:1}
-.profile-info h2{margin:0 0 6px;font-size:20px}
-.profile-actions{display:flex;gap:8px;flex-wrap:wrap}
+.card{background:#fff;border-radius:10px;padding:10px;box-shadow:0 1px 3px rgba(16,24,40,0.04);margin-bottom:12px}
 
-/* cards */
-.card{background:#fff;border-radius:10px;padding:10px;box-shadow:0 1px 3px rgba(16,24,40,0.04)}
+/* stories */
+.stories{display:flex;gap:10px;overflow:auto;padding:12px}
+.story{min-width:120px;height:140px;background:#fff;border-radius:10px;display:flex;align-items:flex-end;padding:8px;font-weight:700;box-shadow:0 1px 2px rgba(0,0,0,0.04)}
+.add-story{background:linear-gradient(90deg,#6a8cff,#8ce6ff);color:#fff}
+
+/* post creator */
 .post-creator{display:flex;gap:10px;align-items:flex-start}
 .avatar{width:42px;height:42px;border-radius:50%;background:#ddd}
 .creator-body{flex:1}
 .creator-body textarea{width:100%;border-radius:8px;padding:8px;border:1px solid #eaeef3;resize:none}
 .creator-row{display:flex;align-items:center;gap:8px;margin-top:8px}
+.creator-actions{margin-left:auto}
+.creator-options{display:flex;gap:8px;margin-top:8px}
+.opt{background:#f3f5f7;border:1px solid #e6e9ee;padding:6px 10px;border-radius:8px;cursor:pointer}
+.small-btn{background:#1877f2;color:#fff;border:none;padding:8px 10px;border-radius:8px;cursor:pointer}
 
-/* feed posts */
+/* feed post */
 .feed-post{background:#fff;border-radius:10px;padding:12px;margin-top:12px;box-shadow:0 1px 3px rgba(16,24,40,0.04)}
 .feed-post .meta{display:flex;justify-content:space-between;align-items:center}
 .feed-post img{max-width:100%;border-radius:8px;margin-top:8px}
 .post-actions{display:flex;gap:12px;margin-top:10px;color:#62666d}
+.muted{color:#777;font-size:13px}
 
 /* bottom nav */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:64px;background:#fff;border-top:1px solid #e6e6e6;display:flex;align-items:center;justify-content:space-around;padding:8px 16px}
 .bottom-nav button{background:none;border:none;font-size:13px;cursor:pointer}
 
-/* small helpers */
-.small-btn{background:#1877f2;color:#fff;border:none;padding:8px 10px;border-radius:8px;cursor:pointer}
-.muted{color:#777;font-size:13px}
-
-/* page-section default hidden handled by inline style in HTML */
+@media(min-width:900px){.container{max-width
