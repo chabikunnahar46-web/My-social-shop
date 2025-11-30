@@ -1,22 +1,31 @@
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db, auth } from "./Firebase.js";
+import { db, storage } from "./Firebase.js";
+import { ref, set, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDownloadURL, uploadBytes, ref as storageRef } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-async function addComment(postId) {
-    const input = document.getElementById("commentInput_" + postId);
-    const text = input.value;
+document.getElementById("uploadBtn").addEventListener("click", async () => {
+    let file = document.getElementById("imageFile").files[0];
+    let caption = document.getElementById("caption").value;
 
-    if (!text) return alert("Please enter a comment!");
-
-    try {
-        await addDoc(collection(db, "posts", postId, "comments"), {
-            text: text,
-            user: auth.currentUser ? auth.currentUser.displayName || auth.currentUser.email : "Anonymous",
-            time: serverTimestamp()
-        });
-        input.value = "";
-    } catch (err) {
-        console.error("Comment Error:", err);
+    if (!file) {
+        alert("Select an image first!");
+        return;
     }
-}
 
-window.addComment = addComment;
+    // 1) Upload to Storage
+    let uniqueName = "post_" + Date.now();
+    let imgRef = storageRef(storage, "uploads/" + uniqueName);
+
+    await uploadBytes(imgRef, file);
+    let imageURL = await getDownloadURL(imgRef);
+
+    // 2) Save to Realtime Database
+    let postRef = push(ref(db, "feed"));
+
+    await set(postRef, {
+        image: imageURL,
+        caption: caption,
+        time: new Date().toISOString()
+    });
+
+    alert("Uploaded Successfully!");
+});
