@@ -1,58 +1,29 @@
-import { db } from "./firebase.js";
-import {
-    collection,
-    addDoc,
-    query,
-    orderBy,
-    onSnapshot
-} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { db, auth } from "./Firebase.js";
+import { ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-let userCountry = "Unknown";
+// Send Message
+document.getElementById("sendBtn").addEventListener("click", () => {
+    const msg = document.getElementById("msgBox").value.trim();
 
-// Country finder
-fetch("https://ipapi.co/json/")
-  .then(res => res.json())
-  .then(data => userCountry = data.country_name);
+    if (msg === "") return;
 
-// Send message
-export async function sendMessage() {
-    const name = document.getElementById("username").value;
-    const msg = document.getElementById("message").value;
+    const user = auth.currentUser;
 
-    if (!name || !msg) {
-        alert("নাম ও মেসেজ দিন!");
-        return;
-    }
-
-    await addDoc(collection(db, "globalChatRoom"), {
-        name: name,
+    push(ref(db, "globalChat"), {
+        user: user ? user.uid : "guest",
         message: msg,
-        country: userCountry,
         time: Date.now()
     });
 
-    document.getElementById("message").value = "";
-}
-
-// Load messages realtime
-const q = query(collection(db, "globalChatRoom"), orderBy("time"));
-
-onSnapshot(q, (snapshot) => {
-    const chat = document.getElementById("chatBox");
-    chat.innerHTML = "";
-
-    snapshot.forEach(doc => {
-        const d = doc.data();
-        chat.innerHTML += `
-            <div class="message">
-                <b>${d.name}</b>: ${d.message}
-                <div class="country">🌍 ${d.country}</div>
-            </div>
-        `;
-    });
-
-    chat.scrollTop = chat.scrollHeight;
+    document.getElementById("msgBox").value = "";
 });
 
-// Button click event
-window.sendMessage = sendMessage;
+// Read Messages
+onChildAdded(ref(db, "globalChat"), (snapshot) => {
+    const data = snapshot.val();
+    const box = document.getElementById("chatBox");
+
+    const p = document.createElement("p");
+    p.innerHTML = `<b>${data.user}</b>: ${data.message}`;
+    box.appendChild(p);
+});
