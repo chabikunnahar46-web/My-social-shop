@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌍 Global Chat Room</title>
+    <link rel="stylesheet" href="chatroom.css">
+</head>
+<body>
+
+    <div class="header">🌍 Global Chat Room</div>
+
+    <div id="chatBox"></div>
+
+    <div class="inputArea">
+        <input type="text" id="username" placeholder="আপনার নাম">
+        <input type="text" id="message" placeholder="মেসেজ লিখুন...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+
+    <script src="firebase.js"></script>
+    <script src="chatroom.js"></script>
+
+</body>
+</html>
