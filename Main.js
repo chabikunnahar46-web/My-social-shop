@@ -1,35 +1,27 @@
-// main.js
-import { db } from "./Firebase.js";
-import { ref as dbRef, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+ import { db } from "./Firebase.js";
+import { ref, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-const feedBox = document.getElementById("feed"); // তোমার index.html এ <div id="feed"></div> থাকতে হবে
+// Send Button Event
+document.getElementById("send").addEventListener("click", () => {
+    const name = document.getElementById("username").value.trim();
+    const message = document.getElementById("message").value.trim();
 
-function formatTime(ts) {
-  const d = new Date(ts);
-  return d.toLocaleString();
-}
+    if(name === "" || message === "") {
+        alert("Please enter name and message!");
+        return;
+    }
 
-onValue(dbRef(db, "feed"), snapshot => {
-  feedBox.innerHTML = "";
-  const items = [];
-  snapshot.forEach(child => {
-    items.push({ key: child.key, ...child.val() });
-  });
-
-  // sort by time desc (recent first)
-  items.sort((a,b) => (b.time || 0) - (a.time || 0));
-
-  items.forEach(item => {
-    const post = document.createElement("div");
-    post.className = "post";
-    post.style = "background:#fff;padding:10px;margin:12px;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,0.1);";
-
-    post.innerHTML = `
-      <div style="font-weight:600;margin-bottom:8px;">${item.uid || 'User'}</div>
-      <img src="${item.image}" style="width:100%;border-radius:8px;max-height:500px;object-fit:cover;">
-      <p style="margin:8px 0;">${item.caption || ''}</p>
-      <small style="color:#666">${formatTime(item.time)}</small>
-    `;
-    feedBox.appendChild(post);
-  });
+    const postsRef = ref(db, "Posts");
+    const newPostRef = push(postsRef);
+    set(newPostRef, {
+        name: name,
+        text: message,
+        timestamp: Date.now()
+    }).then(() => {
+        console.log("✅ Post sent:", message);
+        document.getElementById("username").value = "";
+        document.getElementById("message").value = "";
+    }).catch((err) => {
+        console.error("❌ Error sending post:", err);
+    });
 });
