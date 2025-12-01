@@ -1,61 +1,35 @@
-import { auth, db, storage } from './firebase.js';
+// main.js
+import { db } from "./Firebase.js";
+import { ref as dbRef, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-import { 
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+const feedBox = document.getElementById("feed"); // তোমার index.html এ <div id="feed"></div> থাকতে হবে
 
-import { 
-  collection, addDoc, getDocs 
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+function formatTime(ts) {
+  const d = new Date(ts);
+  return d.toLocaleString();
+}
 
-import { 
-  uploadBytes, getDownloadURL, ref as sRef 
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+onValue(dbRef(db, "feed"), snapshot => {
+  feedBox.innerHTML = "";
+  const items = [];
+  snapshot.forEach(child => {
+    items.push({ key: child.key, ...child.val() });
+  });
 
-// Signup
-window.signup = async (email, password) => {
-  try {
-    await createUserWithEmailAndPassword(auth, email, password);
-    alert("Signup successful!");
-  } catch (err) {
-    alert(err.message);
-  }
-};
+  // sort by time desc (recent first)
+  items.sort((a,b) => (b.time || 0) - (a.time || 0));
 
-// Login
-window.login = async (email, password) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    alert("Login successful!");
-  } catch (err) {
-    alert(err.message);
-  }
-};
+  items.forEach(item => {
+    const post = document.createElement("div");
+    post.className = "post";
+    post.style = "background:#fff;padding:10px;margin:12px;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,0.1);";
 
-// Upload Post (image + text)
-window.uploadPost = async () => {
-    let file = document.getElementById("imageFile").files[0];
-    let caption = document.getElementById("caption").value;
-
-    if (!file) return alert("Select an image first!");
-
-    let imgRef = sRef(storage, "posts/" + Date.now());
-    await uploadBytes(imgRef, file);
-
-    let imageURL = await getDownloadURL(imgRef);
-
-    await addDoc(collection(db, "Posts"), {
-        caption,
-        image: imageURL,
-        time: Date.now()
-    });
-
-    alert("Post uploaded!");
-};
-
-// Fetch Posts
-window.fetchPosts = async () => {
-    const snap = await getDocs(collection(db, "Posts"));
-    snap.forEach(doc => console.log(doc.data()));
-};
+    post.innerHTML = `
+      <div style="font-weight:600;margin-bottom:8px;">${item.uid || 'User'}</div>
+      <img src="${item.image}" style="width:100%;border-radius:8px;max-height:500px;object-fit:cover;">
+      <p style="margin:8px 0;">${item.caption || ''}</p>
+      <small style="color:#666">${formatTime(item.time)}</small>
+    `;
+    feedBox.appendChild(post);
+  });
+});
