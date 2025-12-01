@@ -1,108 +1,120 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bondhutto24</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-    }
+    <meta charset="UTF-8">
+    <title>Profile • Bondhutto24</title>
+    <link rel="stylesheet" href="Style.css">
 
-    /* Top Navigation */
-    .top-nav {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      background: #ffffff;
-      padding: 10px 0;
-      border-bottom: 1px solid #ddd;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-    }
-    .top-nav a {
-      text-decoration: none;
-      color: #333;
-      font-size: 15px;
-      font-weight: 600;
-    }
+<style>
+/* -------- PROFILE TOP -------- */
+.profile-header {
+    width: 100%;
+    background: #1877f2;
+    color: white;
+    padding-bottom: 50px;
+    text-align: center;
+    position: relative;
+}
 
-    /* Bottom Navigation Like YouTube */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      background: #ffffff;
-      border-top: 1px solid #ddd;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      z-index: 999;
-    }
-    .bottom-nav .item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 12px;
-      color: #333;
-    }
+.cover-photo {
+    width: 100%;
+    height: 180px;
+    background: #145dbf;
+}
 
-    /* Icons placeholder */
-    .icon {
-      width: 25px;
-      height: 25px;
-      background: #ccc;
-      border-radius: 5px;
-      margin-bottom: 4px;
-    }
+/* 🔶 Square Profile Pic (Facebook Style) */
+.profile-pic {
+    width: 130px;
+    height: 130px;
+    border-radius: 12px; /* আটকোনা */
+    border: 4px solid white;
+    position: absolute;
+    bottom: -65px;
+    left: 50%;
+    transform: translateX(-50%);
+    object-fit: cover;
+}
 
-    /* Page Content */
-    .content {
-      padding: 20px;
-      margin-bottom: 80px; /* space for bottom nav */
-    }
-  </style>
+/* Profile Info */
+.profile-info {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.profile-info h2 {
+    margin: 10px 0;
+}
+
+.profile-info p {
+    color: #555;
+}
+
+/* -------- POSTS -------- */
+.post {
+    background: #fff;
+    padding: 12px;
+    width: 92%;
+    margin: 12px auto;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.post img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* -------- BOTTOM MENU -------- */
+.bottom-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 999;
+}
+
+.bottom-menu a {
+    text-decoration: none;
+    color: #444;
+    font-size: 22px;
+}
+</style>
 </head>
+
 <body>
 
-  <!-- Top Navigation -->
-  <div class="top-nav">
-    <a href="#">Bondhutto24</a>
-    <a href="#">Home</a>
-    <a href="#">Reels</a>
-    <a href="#">Friends</a>
-    <a href="#">Notification</a>
-    <a href="#">Learning</a>
-  </div>
+<!-- 🔵 Profile Header -->
+<div class="profile-header">
+    <div class="cover-photo"></div>
 
-  <!-- Page Content -->
-  <div class="content">
-    <h2>Welcome to Bondhutto24</h2>
-    <p>Your social hub.</p>
-  </div>
+    <!-- Square Profile Photo -->
+    <img src="https://i.imgur.com/Qq6pZ4j.png" class="profile-pic" id="profilePic">
 
-  <!-- Bottom Navigation (YouTube Style) -->
-  <div class="bottom-nav">
-    <div class="item">
-      <div class="icon"></div>
-      <span>Home</span>
+    <div class="profile-info">
+        <h2 id="profileName">User Name</h2>
+        <p>Your personal profile</p>
     </div>
+</div>
 
-    <div class="item">
-      <div class="icon"></div>
-      <span>Gift</span>
-    </div>
+<!-- 🔥 User Posts -->
+<div id="myPosts"></div>
 
-    <div class="item">
-      <div class="icon"></div>
-      <span>Profile</span>
-    </div>
-  </div>
+<!-- 🔵 Bottom Navigation -->
+<div class="bottom-menu">
+    <a href="index.html">🏠</a>
+    <a href="Upload.html">➕</a>
+    <a href="reels.html">🎬</a>
+    <a href="friends.html">👥</a>
+    <a href="profile.html">👤</a>
+</div>
+
+<script src="Firebase.js"></script>
+<script src="Profile.js"></script>
 
 </body>
 </html>
