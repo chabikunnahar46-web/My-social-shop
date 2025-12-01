@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
@@ -28,4 +28,27 @@
     <script type="module" src="Main.js"></script>
 
 </body>
+    <input type="text" id="username" placeholder="Your Name">
+<input type="text" id="message" placeholder="Message">
+<button id="send">Send</button>
+
+<script type="module">
+import { db } from "./Firebase.js";
+import { ref, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+document.getElementById("send").addEventListener("click", () => {
+    const name = document.getElementById("username").value;
+    const message = document.getElementById("message").value;
+
+    const postsRef = ref(db, "Posts");
+    const newPostRef = push(postsRef);
+    set(newPostRef, {
+        name: name,
+        text: message,
+        timestamp: Date.now()
+    });
+
+    console.log("✅ Post sent:", message);
+});
+</script>
 </html>
