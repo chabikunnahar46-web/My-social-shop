@@ -2,147 +2,125 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bondhutto24 Friends</title>
-<link rel="stylesheet" href="style.css">
+<title>Friends • Bondhutto24</title>
+
 <style>
-  body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; }
-  header.topbar { display:flex; align-items:center; padding:10px 20px; background:#fff; border-bottom:1px solid #ddd; }
-  header .logo { font-size:24px; font-weight:bold; margin-right:40px; }
-  nav.menu { display:flex; gap:20px; }
-  nav.menu a { text-decoration:none; color:#333; font-size:16px; display:flex; align-items:center; gap:6px; }
-  nav.menu a img { width:24px; height:24px; }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f0f2f5;
+}
 
-  .friend-page { max-width:1200px; margin:20px auto; display:flex; gap:20px; flex-wrap:wrap; }
-  .friend-sidebar { width:250px; background:#fff; border-radius:10px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
-  .friend-sidebar h3 { margin-top:0; margin-bottom:10px; }
-  .friend-sidebar ul { list-style:none; padding:0; }
-  .friend-sidebar li { padding:8px 0; cursor:pointer; border-bottom:1px solid #eee; }
-  .friend-sidebar li:hover { background:#f0f0f0; border-radius:6px; }
+/* PAGE TOP */
+.header {
+    background: #1877f2;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
 
-  .friend-feed { flex:1; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+/* FRIEND LIST BOX */
+.friend-box {
+    background: #fff;
+    padding: 12px;
+    margin: 10px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
 
-  .friend-card { background:#fff; border-radius:10px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
-  .friend-card img { width:60px; height:60px; border-radius:50%; object-fit:cover; float:left; margin-right:12px; }
-  .friend-card h4 { margin:0; }
-  .friend-card p { margin:4px 0; font-size:14px; color:#555; }
-  .friend-card .talent-upload { margin-top:10px; display:flex; flex-direction:column; gap:6px; }
-  .friend-card .talent-upload input { padding:6px; border-radius:6px; border:1px solid #ccc; }
-  .friend-actions { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
-  .friend-actions button { padding:6px 12px; border:none; border-radius:6px; cursor:pointer; font-weight:bold; }
-  .like { background:#ff4d4f; color:white; }
-  .comment { background:#1890ff; color:white; }
-  .share { background:#595959; color:white; }
-  .points { font-weight:bold; color:#52c41a; margin-top:6px; }
-  .feed-media { width:100%; border-radius:8px; margin-top:8px; }
+/* Profile Picture (Square) */
+.friend-box img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 12px; /* আটকোনা */
+}
+
+/* Name + Button */
+.friend-info {
+    flex: 1;
+}
+
+.friend-name {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.add-btn {
+    background: #1877f2;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.msg-btn {
+    background: #e4e6eb;
+    color: #333;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* BOTTOM MENU */
+.bottom-menu {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.bottom-menu a {
+    font-size: 22px;
+    text-decoration: none;
+    color: #333;
+}
 </style>
+
 </head>
 <body>
 
-<header class="topbar">
-  <div class="logo">Bondhutto24</div>
-  <nav class="menu">
-    <a href="index.html"><img src="icons/home.png" alt=""> Home</a>
-    <a href="reels.html"><img src="icons/video.png" alt=""> Reels</a>
-    <a href="friends.html"><img src="icons/friends.png" alt=""> Friends</a>
-    <a href="skills.html"><img src="icons/learning.png" alt=""> Learning</a>
-    <a href="profile.html"><img src="icons/profile.png" alt=""> Profile</a>
-  </nav>
-</header>
+<div class="header">Friends</div>
 
-<div class="friend-page">
-  <!-- Sidebar -->
-  <div class="friend-sidebar">
-    <h3>Friend Categories</h3>
-    <ul>
-      <li data-category="all">All Friends</li>
-      <li data-category="classmates">Classmates</li>
-      <li data-category="business">Business Network</li>
-      <li data-category="entertainment">Entertainment</li>
-      <li data-category="learning">Learning Partners</li>
-    </ul>
-  </div>
-
-  <!-- Main Feed -->
-  <div class="friend-feed" id="friendFeed">
-    <!-- Cards will render dynamically -->
-  </div>
+<!-- FRIEND LIST SAMPLE -->
+<div class="friend-box">
+    <img src="https://i.imgur.com/3G0M3Fp.jpeg">
+    <div class="friend-info">
+        <div class="friend-name">Ria Rahman</div>
+        <button class="add-btn">Add Friend</button>
+        <button class="msg-btn">Message</button>
+    </div>
 </div>
 
-<script>
-const friends = [
-  {name:"Alice", category:"classmates", pic:"images/user1.jpg", status:"Completed Python course", talent:null, points:10},
-  {name:"Bob", category:"business", pic:"images/user2.jpg", status:"Launched new product", talent:null, points:20},
-  {name:"Charlie", category:"entertainment", pic:"images/user3.jpg", status:"Shared a funny clip", talent:null, points:15},
-  {name:"Diana", category:"learning", pic:"images/user4.jpg", status:"Uploaded tutorial video", talent:null, points:25},
-];
+<div class="friend-box">
+    <img src="https://i.imgur.com/nRbNw6g.jpeg">
+    <div class="friend-info">
+        <div class="friend-name">Hasan Hossain</div>
+        <button class="add-btn">Add Friend</button>
+        <button class="msg-btn">Message</button>
+    </div>
+</div>
 
-const feedContainer = document.getElementById("friendFeed");
-const categoryItems = document.querySelectorAll(".friend-sidebar li");
-
-function renderFriends(filter="all") {
-  feedContainer.innerHTML = "";
-  friends.forEach((friend,index) => {
-    if(filter === "all" || friend.category === filter){
-      const card = document.createElement("div");
-      card.className = "friend-card";
-      card.innerHTML = `
-        <img src="${friend.pic}" alt="${friend.name}">
-        <h4>${friend.name}</h4>
-        <p>${friend.status}</p>
-        <div class="talent-upload">
-          <input type="file" id="talent${index}" accept="image/*,video/*">
-          <button onclick="uploadTalent(${index})">Upload Talent</button>
-        </div>
-        ${friend.talent ? renderMedia(friend.talent) : ''}
-        <div class="friend-actions">
-          <button class="like" onclick="addPoints(${index},5)">❤️ Like</button>
-          <button class="comment">💬 Comment</button>
-          <button class="share">🔁 Share</button>
-        </div>
-        <div class="points">Points: ${friend.points}</div>
-      `;
-      feedContainer.appendChild(card);
-    }
-  });
-}
-
-function renderMedia(file){
-  if(file.type.startsWith('video')){
-    return `<video class="feed-media" controls src="${file.url}"></video>`;
-  } else if(file.type.startsWith('image')){
-    return `<img class="feed-media" src="${file.url}" alt="Talent Upload">`;
-  }
-  return '';
-}
-
-function uploadTalent(index){
-  const fileInput = document.getElementById(`talent${index}`);
-  const file = fileInput.files[0];
-  if(file){
-    const url = URL.createObjectURL(file);
-    friends[index].talent = {url, type:file.type};
-    friends[index].points += 10; // Add points for upload
-    renderFriends();
-  }
-}
-
-function addPoints(index,pts){
-  friends[index].points += pts;
-  renderFriends();
-}
-
-// Initial render
-renderFriends();
-
-// Category filter
-categoryItems.forEach(item => {
-  item.addEventListener("click",()=>{
-    const cat = item.getAttribute("data-category");
-    renderFriends(cat);
-  });
-});
-</script>
+<!-- 🔵 BOTTOM NAV -->
+<div class="bottom-menu">
+    <a href="index.html">🏠</a>
+    <a href="Upload.html">📤</a>
+    <a href="reels.html">🎬</a>
+    <a href="friends.html">👥</a>
+    <a href="profile.html">👤</a>
+</div>
 
 </body>
-    </html>
+</html>
