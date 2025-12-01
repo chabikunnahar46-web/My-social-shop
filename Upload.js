@@ -1,31 +1,26 @@
-import { db, storage } from "./Firebase.js";
-import { ref, set, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-import { getDownloadURL, uploadBytes, ref as storageRef } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
-
 document.getElementById("uploadBtn").addEventListener("click", async () => {
+
     let file = document.getElementById("imageFile").files[0];
-    let caption = document.getElementById("caption").value;
+    if (!file) return alert("Select an image first!");
 
-    if (!file) {
-        alert("Select an image first!");
-        return;
-    }
+    let formData = new FormData();
+    formData.append("file", file); 
+    formData.append("upload_preset", "My upload"); // আপনার preset name
 
-    // 1) Upload to Storage
-    let uniqueName = "post_" + Date.now();
-    let imgRef = storageRef(storage, "uploads/" + uniqueName);
-
-    await uploadBytes(imgRef, file);
-    let imageURL = await getDownloadURL(imgRef);
-
-    // 2) Save to Realtime Database
-    let postRef = push(ref(db, "feed"));
-
-    await set(postRef, {
-        image: imageURL,
-        caption: caption,
-        time: new Date().toISOString()
+    let response = await fetch("https://api.cloudinary.com/v1_1/dj1wdote4/image/upload", {
+        method: "POST",
+        body: formData
     });
 
-    alert("Uploaded Successfully!");
+    let data = await response.json();
+    console.log(data);
+
+    let url = data.secure_url;
+
+    document.getElementById("preview").innerHTML = `
+        <img src="${url}" width="200">
+        <p>Image uploaded!</p>
+    `;
+
+    alert("Upload Successful!");
 });
