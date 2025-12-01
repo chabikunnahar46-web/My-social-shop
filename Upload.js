@@ -1,26 +1,62 @@
-document.getElementById("uploadBtn").addEventListener("click", async () => {
+ // upload.js
+import { db, auth } from "./Firebase.js";
+import { ref as dbRef, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-    let file = document.getElementById("imageFile").files[0];
-    if (!file) return alert("Select an image first!");
+const CLOUD_NAME = "dj1wdote4";
+const UPLOAD_PRESET = "My upload";
 
-    let formData = new FormData();
-    formData.append("file", file); 
-    formData.append("upload_preset", "My upload"); // আপনার preset name
+const uploadBtn = document.getElementById("uploadBtn");
+const imageFileInput = document.getElementById("imageFile");
+const captionInput = document.getElementById("caption");
+const statusBox = document.getElementById("uploadStatus");
 
-    let response = await fetch("https://api.cloudinary.com/v1_1/dj1wdote4/image/upload", {
-        method: "POST",
-        body: formData
+uploadBtn.addEventListener("click", async () => {
+  const file = imageFileInput.files[0];
+  const caption = (captionInput.value || "").trim();
+
+  if (!file) {
+    alert("Please select an image first!");
+    return;
+  }
+
+  try {
+    statusBox.innerText = "Uploading to Cloudinary...";
+
+    const form = new FormData();
+    form.append("file", file);
+    form.append("upload_preset", UPLOAD_PRESET);
+
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+      method: "POST",
+      body: form
     });
 
-    let data = await response.json();
-    console.log(data);
+    const data = await res.json();
 
-    let url = data.secure_url;
+    if (!data.secure_url) throw new Error("Upload failed");
 
-    document.getElementById("preview").innerHTML = `
-        <img src="${url}" width="200">
-        <p>Image uploaded!</p>
-    `;
+    const imageURL = data.secure_url;
 
-    alert("Upload Successful!");
+    statusBox.innerText = "Saving post to database...";
+
+    // current user id (optional) — guest if not logged in
+    const uid = auth?.currentUser?.uid || "guest";
+
+    // Push to Realtime DB under /feed
+    const newPostRef = push(dbRef(db, "feed"));
+    await set(newPostRef, {
+      image: imageURL,
+      caption: caption,
+      uid: uid,
+      time: Date.now()
+    });
+
+    statusBox.innerHTML = "Uploaded successfully! <br><img src='" + imageURL + "' width='200' />";
+    // clear inputs
+    captionInput.value = "";
+    imageFileInput.value = "";
+  } catch (err) {
+    console.error(err);
+    statusBox.innerText = "Error: " + (err.message || err);
+  }
 });
